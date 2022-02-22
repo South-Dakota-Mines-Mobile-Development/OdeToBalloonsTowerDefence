@@ -1,3 +1,12 @@
 <resources>
     <string name="app_name">OdeToBallonsTowerDefence</string>
+    <string name="playerOneTextbox">Player 1</string>
+    <string name="playerTwoTextbox">Player 2</string>
+    <string name="startButton">START</string>
+    <string name="player1Label">Player 1</string>
+    <string name="player2Label">Player 2</string>
+    <string name="player1Name">Jacob</string>
+    <string name="player2Name">Jacob</string>
+    <string name="player1Score">0</string>
+    <string name="player2Score">0</string>
 </resources>
