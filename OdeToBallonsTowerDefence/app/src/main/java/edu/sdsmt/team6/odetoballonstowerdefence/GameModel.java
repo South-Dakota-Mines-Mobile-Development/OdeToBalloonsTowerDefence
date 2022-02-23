@@ -52,6 +52,12 @@ public class GameModel {
         collectionArea = null;
     }
 
+    public void setCollectionAreaType(int type){
+        collectionAreaType = type;
+    }
+
+
+
     public ArrayList<Balloon> getBalloons(){
         ArrayList<Balloon> unPoppedBalloons = new ArrayList<>();
 
@@ -76,6 +82,9 @@ public class GameModel {
         return popped;
     }
 
+    public CollectionArea getCollectionArea(){
+        return collectionArea;
+    }
 
     private void checkBalloons(){
         for (Balloon balloon: balloons) {
