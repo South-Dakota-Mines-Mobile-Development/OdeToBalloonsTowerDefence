@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 public class GameActivity extends AppCompatActivity {
     private GameViewModel viewModel;
+    private GameView gameView = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,6 +23,9 @@ public class GameActivity extends AppCompatActivity {
             this.getSupportActionBar().hide();
         }
         catch (NullPointerException e){}
+
+        //Get Views
+        gameView = (GameView) findViewById(R.id.gameView);
 
         //Set Player's Names from the main activity screen
         Intent intent = getIntent();
@@ -48,6 +52,9 @@ public class GameActivity extends AppCompatActivity {
         });
 
         viewModel.getCollectionArea().observe(this, collectionArea -> {
+
+            gameView.setBloons();
+
             // Set something in the ui with collection data.
             //this code will run any time the collection area object changes.
             if(collectionArea == null)
