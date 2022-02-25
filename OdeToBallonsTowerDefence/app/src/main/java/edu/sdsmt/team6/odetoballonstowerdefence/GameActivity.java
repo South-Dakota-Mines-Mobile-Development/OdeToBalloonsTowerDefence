@@ -1,12 +1,20 @@
 package edu.sdsmt.team6.odetoballonstowerdefence;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
 import android.widget.TextView;
 
+import edu.sdsmt.team6.odetoballonstowerdefence.ModelDataTypes.CollectionArea;
+
 public class GameActivity extends AppCompatActivity {
+    private GameViewModel viewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,6 +38,23 @@ public class GameActivity extends AppCompatActivity {
         playerOneTextView.setText(playerOneName);
         playerTwoTextView.setText(playerTwoName);
 
+
+        //ViewModel Example Code
+        viewModel = new ViewModelProvider(this).get(GameViewModel.class);
+
+        viewModel.getCollectionArea().observe(this, collectionArea -> {
+            // Set something in the ui with collection data.
+            //this code will run any time the collection area object changes.
+            Log.i("GameActivity",
+                    "collectionX: " + collectionArea.getX() +
+                         ", collectionY: " + collectionArea.getY() +
+                         ", CollectionH: " + collectionArea.getHeight() +
+                         ", collectionW: " + collectionArea.getWidth()
+            );
+        });
+
+        findViewById(R.id.viewModelExampleButton)
+                .setOnClickListener(v -> viewModel.onButtonClick());
 
     }
 }
