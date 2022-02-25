@@ -96,5 +96,16 @@
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="@+id/player2Label"
             app:layout_constraintEnd_toStartOf="@+id/player2Label" />
+
+
     </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <Button
+        android:id="@+id/viewModelExampleButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/startButton"
+        app:layout_constraintBottom_toBottomOf="@+id/gameView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>
