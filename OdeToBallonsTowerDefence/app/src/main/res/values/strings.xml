@@ -9,4 +9,10 @@
     <string name="player2Name">Jacob</string>
     <string name="player1Score">0</string>
     <string name="player2Score">0</string>
+    <string name="tacks">Select Tacks (circle)</string>
+    <string name="tackBtn">select tacks</string>
+    <string name="bomb">Select Bomb (rectangle)</string>
+    <string name="bombBtn">select bomb</string>
+    <string name="dart">Select Dart (line)</string>
+    <string name="dartBtn">select dart</string>
 </resources>

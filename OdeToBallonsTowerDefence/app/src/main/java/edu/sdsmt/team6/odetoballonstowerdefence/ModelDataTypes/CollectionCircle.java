@@ -4,8 +4,10 @@ import java.util.Random;
 
 public class CollectionCircle extends CollectionArea {
 
-    public CollectionCircle(int xLocation, int yLocation) {
-        super(xLocation, yLocation, 100, 100);
+    private float radius = (float)Math.sqrt(((height/2)*(width/2))*2);
+
+    public CollectionCircle(int xLocation, int yLocation, int width, int height, int screenWidth, int screenHeight) {
+        super(xLocation, yLocation, 100, 100, screenWidth, screenHeight);
     }
 
     @Override
