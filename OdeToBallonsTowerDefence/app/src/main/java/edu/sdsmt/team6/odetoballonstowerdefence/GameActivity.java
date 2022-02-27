@@ -1,17 +1,12 @@
 package edu.sdsmt.team6.odetoballonstowerdefence;
 
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
 import android.widget.TextView;
-
-import edu.sdsmt.team6.odetoballonstowerdefence.ModelDataTypes.CollectionArea;
 
 public class GameActivity extends AppCompatActivity {
     private GameViewModel viewModel;
@@ -42,19 +37,41 @@ public class GameActivity extends AppCompatActivity {
         //ViewModel Example Code
         viewModel = new ViewModelProvider(this).get(GameViewModel.class);
 
+
+        findViewById(R.id.gameView).addOnLayoutChangeListener(
+                (v, left, top, right, bottom, lastLeft, lastTop, lastRight, lastBottom) -> {
+                    viewModel.onGameSizeChanged(v.getWidth(), v.getHeight());
+        });
+
+        findViewById(R.id.gameView).setOnClickListener(v -> {
+            viewModel.onInitialPress(0, 0);
+        });
+
         viewModel.getCollectionArea().observe(this, collectionArea -> {
             // Set something in the ui with collection data.
             //this code will run any time the collection area object changes.
-            Log.i("GameActivity",
-                    "collectionX: " + collectionArea.getX() +
-                         ", collectionY: " + collectionArea.getY() +
-                         ", CollectionH: " + collectionArea.getHeight() +
-                         ", collectionW: " + collectionArea.getWidth()
-            );
+            if(collectionArea == null)
+                Log.i("GameActivity", "collectionArea null");
+            else
+                Log.i("GameActivity",
+                        "collectionX: " + collectionArea.getX() +
+                                ", collectionY: " + collectionArea.getY() +
+                                ", CollectionH: " + collectionArea.getHeight() +
+                                ", collectionW: " + collectionArea.getWidth());
         });
 
-        findViewById(R.id.viewModelExampleButton)
-                .setOnClickListener(v -> viewModel.onButtonClick());
+
+
+        viewModel.getCanMakeMove().observe(this, canMakeMove ->{
+            findViewById(R.id.makeMoveButton).setEnabled(canMakeMove);
+            findViewById(R.id.resetMove).setEnabled(canMakeMove);
+        });
+
+        findViewById(R.id.makeMoveButton)
+                .setOnClickListener(v -> viewModel.onMakeMove());
+
+        findViewById(R.id.resetMove)
+                .setOnClickListener(v -> viewModel.onResetCollectionArea());
 
     }
 }

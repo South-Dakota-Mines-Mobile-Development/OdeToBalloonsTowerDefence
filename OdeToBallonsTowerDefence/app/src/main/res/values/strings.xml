@@ -15,4 +15,6 @@
     <string name="bombBtn">select bomb</string>
     <string name="dart">Select Dart (line)</string>
     <string name="dartBtn">select dart</string>
+    <string name="make_move">Make Move</string>
+    <string name="reset_move">Reset Move</string>
 </resources>

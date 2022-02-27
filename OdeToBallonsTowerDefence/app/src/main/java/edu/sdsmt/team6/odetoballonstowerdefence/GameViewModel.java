@@ -4,32 +4,74 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-import java.util.Random;
+import java.util.ArrayList;
 
+import edu.sdsmt.team6.odetoballonstowerdefence.ModelDataTypes.Balloon;
 import edu.sdsmt.team6.odetoballonstowerdefence.ModelDataTypes.CollectionArea;
-import edu.sdsmt.team6.odetoballonstowerdefence.ModelDataTypes.CollectionCircle;
 
 public class GameViewModel extends ViewModel {
     private final MutableLiveData<CollectionArea> collectionArea = new MutableLiveData<>();
+    private final MutableLiveData<ArrayList<Balloon>> balloons = new MutableLiveData<>();
+    private final MutableLiveData<Boolean> canMakeMove = new MutableLiveData<>();
+    private final GameModel gameModel;
 
     public GameViewModel(){
-        collectionArea.setValue(new CollectionCircle(100, 100,100, 100,100, 100));
+        gameModel = new GameModel();
+        notifyStateChange();
     }
 
     public LiveData<CollectionArea> getCollectionArea() {
         return collectionArea;
     }
 
-    public void onButtonClick(){
-        Random random = new Random();
+    public LiveData<ArrayList<Balloon>> getBalloons() {
+        return balloons;
+    }
 
-        collectionArea.setValue(new CollectionCircle(
-                random.nextInt(100),
-                random.nextInt(100),
-                random.nextInt(100),
-                random.nextInt(100),
-                random.nextInt(100),
-                random.nextInt(100)));
+    public LiveData<Boolean> getCanMakeMove() {
+        return canMakeMove;
+    }
+
+    public void onGameSizeChanged(int screenWidth, int screenHeight){
+        gameModel.setScreenSize(screenWidth, screenHeight);
+        notifyStateChange();
+    }
+
+    public void onUpdateCollectionAreaType(int collectionAreaType){
+        gameModel.setCollectionAreaType(collectionAreaType);
+        notifyStateChange();
+    }
+
+    public void onInitialPress(int x, int y){
+        gameModel.openCollectArea(x, y);
+        notifyStateChange();
+    }
+
+    public void onMoveOrSecondaryPress(int x, int y){
+        //gameModel function to be added
+        //gameModel.updateSecondaryPoint(x, y);
+        notifyStateChange();
+    }
+
+    public void onResetCollectionArea(){
+        gameModel.closeCollectArea();
+        notifyStateChange();
+    }
+
+    public void onMakeMove(){
+        //gameModel function to be added
+        //gameModel.makeMove();
+        notifyStateChange();
+    }
+
+
+
+
+
+    private void notifyStateChange(){
+        collectionArea.setValue(gameModel.getCollectionArea());
+        balloons.setValue(gameModel.getBalloons());
+        canMakeMove.setValue(gameModel.getCollectionArea() != null);
     }
 
 }
