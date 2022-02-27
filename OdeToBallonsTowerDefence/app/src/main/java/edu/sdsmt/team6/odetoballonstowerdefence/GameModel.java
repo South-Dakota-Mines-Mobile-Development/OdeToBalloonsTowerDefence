@@ -36,11 +36,7 @@ public class GameModel {
             int locX = rand.nextInt(screenWidth-20) + 10;
             int locY = rand.nextInt(screenHeight-20) + 10;
 
-            //We may want to randomize these parameters
-            int balloonHeight = 30;
-            int balloonWidth = 10;
-
-            balloons.add(new Balloon(locX, locY, balloonWidth, balloonHeight));
+            balloons.add(new Balloon(locX, locY));
         }
     }
 
