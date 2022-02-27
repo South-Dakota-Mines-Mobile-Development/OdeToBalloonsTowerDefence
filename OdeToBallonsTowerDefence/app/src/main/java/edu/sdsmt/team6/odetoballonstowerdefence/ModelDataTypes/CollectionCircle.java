@@ -1,18 +1,27 @@
 package edu.sdsmt.team6.odetoballonstowerdefence.ModelDataTypes;
 
-import java.util.Random;
-
 public class CollectionCircle extends CollectionArea {
 
-    private int radius = (int)Math.sqrt(((height/2)*(width/2))*2);
+    private int radius;
 
-    private int minX = super.getX() - super.width - 5;
-    private int maxX = super.getX() + super.width + 5;
-    private int minY = super.getY() - super.height - 5;
-    private int maxY = super.getY() + super.height + 5;
+    public CollectionCircle(int xLocation, int yLocation, int screenWidth, int screenHeight) {
+        super(xLocation, yLocation, screenWidth, screenHeight);
+    }
 
-    public CollectionCircle(int xLocation, int yLocation, int width, int height, int screenWidth, int screenHeight) {
-        super(xLocation, yLocation, width, height, screenWidth, screenHeight);
+    @Override
+    public void updateSecondaryPoint(int new_xLocation, int new_yLocation) {
+        int x_width = Math.abs(getX() - new_xLocation);
+        int y_width = Math.abs(getY() - new_yLocation);
+        if(x_width > y_width){
+            this.width = x_width + 5;
+            this.height = x_width + 5;
+            this.radius = x_width + 5;
+        }
+        else{
+            this.width = y_width + 5;
+            this.height = y_width + 5;
+            this.radius = y_width + 5;
+        }
     }
 
     @Override
@@ -23,10 +32,8 @@ public class CollectionCircle extends CollectionArea {
     }
 
     private boolean balloonInArea(Balloon b){
-        if(b.getX() >= minX && b.getX() <= maxX && b.getY() >= minY && b.getY() <= maxY){
-            return true;
-        }
-        return false;
+        return b.getX() >= this.getX() - radius && b.getX() <= this.getX() + radius &&
+                b.getY() >= this.getY() - radius && b.getY() <= this.getY() + radius;
     }
 
 }

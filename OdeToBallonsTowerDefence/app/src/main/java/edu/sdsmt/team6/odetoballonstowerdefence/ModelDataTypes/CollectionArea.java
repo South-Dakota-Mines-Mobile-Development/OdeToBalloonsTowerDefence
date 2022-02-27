@@ -7,24 +7,19 @@ public abstract class CollectionArea {
 
     private int xLocation;
     private int yLocation;
-    protected final int width;
-    protected final int height;
-    private int screenWidth;
-    private int screenHeight;
+    protected int width;
+    protected int height;
+    protected int screenWidth;
+    protected int screenHeight;
 
-    public CollectionArea(int xLocation, int yLocation, int width, int height, int screenWidth, int screenHeight) {
+    public CollectionArea(int xLocation, int yLocation, int screenWidth, int screenHeight) {
         this.xLocation = xLocation;
         this.yLocation = yLocation;
-        this.width = width;
-        this.height = height;
         this.screenWidth = screenWidth;
         this.screenHeight = screenHeight;
     }
 
-    public void move(int xLocation, int yLocation){
-        this.xLocation = xLocation;
-        this.yLocation = yLocation;
-    }
+    public abstract void updateSecondaryPoint(int new_xLocation, int new_yLocation);
 
     public int getX(){
         return xLocation;
