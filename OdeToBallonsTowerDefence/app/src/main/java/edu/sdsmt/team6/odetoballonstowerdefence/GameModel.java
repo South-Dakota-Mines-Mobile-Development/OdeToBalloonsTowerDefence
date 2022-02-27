@@ -26,9 +26,13 @@ public class GameModel {
     private int screenWidth;
     private int screenHeight;
 
-    public GameModel(int screenWidth, int screenHeight, int numBalloons){
+    public void setScreenSize(int screenWidth, int screenHeight){
         this.screenWidth = screenWidth;
         this.screenHeight = screenHeight;
+
+    }
+
+    public void setNumBalloons(int numBalloons){
         Random rand = new Random();
 
         for (int i = 0; i < numBalloons; i++) {
@@ -75,7 +79,7 @@ public class GameModel {
         checkBalloons();
     }
 
-    public void closeCollectArea(int x, int y){
+    public void closeCollectArea(){
         collectionArea = null;
     }
 
