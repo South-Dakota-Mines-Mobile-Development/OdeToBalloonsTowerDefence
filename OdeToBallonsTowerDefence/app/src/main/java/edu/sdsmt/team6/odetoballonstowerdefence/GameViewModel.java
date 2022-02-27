@@ -13,7 +13,7 @@ public class GameViewModel extends ViewModel {
     private final MutableLiveData<CollectionArea> collectionArea = new MutableLiveData<>();
 
     public GameViewModel(){
-        collectionArea.setValue(new CollectionCircle(100, 100));
+        collectionArea.setValue(new CollectionCircle(100, 100,100, 100,100, 100));
     }
 
     public LiveData<CollectionArea> getCollectionArea() {
@@ -24,6 +24,10 @@ public class GameViewModel extends ViewModel {
         Random random = new Random();
 
         collectionArea.setValue(new CollectionCircle(
+                random.nextInt(100),
+                random.nextInt(100),
+                random.nextInt(100),
+                random.nextInt(100),
                 random.nextInt(100),
                 random.nextInt(100)));
     }

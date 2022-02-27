@@ -9,12 +9,16 @@ public abstract class CollectionArea {
     private int yLocation;
     protected final int width;
     protected final int height;
+    private int screenWidth;
+    private int screenHeight;
 
-    public CollectionArea(int xLocation, int yLocation, int width, int height) {
+    public CollectionArea(int xLocation, int yLocation, int width, int height, int screenWidth, int screenHeight) {
         this.xLocation = xLocation;
         this.yLocation = yLocation;
         this.width = width;
         this.height = height;
+        this.screenWidth = screenWidth;
+        this.screenHeight = screenHeight;
     }
 
     public void move(int xLocation, int yLocation){

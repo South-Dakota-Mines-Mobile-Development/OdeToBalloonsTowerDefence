@@ -4,8 +4,8 @@ import java.util.Random;
 
 public class CollectionRectangle extends CollectionArea {
 
-    public CollectionRectangle(int xLocation, int yLocation) {
-        super(xLocation, yLocation, 100, 150);
+    public CollectionRectangle(int xLocation, int yLocation, int width, int height, int screenWidth, int screenHeight) {
+        super(xLocation, yLocation, 100, 150, screenWidth, screenHeight);
     }
 
     @Override
