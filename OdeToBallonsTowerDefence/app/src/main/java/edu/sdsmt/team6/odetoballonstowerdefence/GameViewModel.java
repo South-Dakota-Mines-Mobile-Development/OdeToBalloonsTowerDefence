@@ -20,6 +20,7 @@ public class GameViewModel extends ViewModel {
         notifyStateChange();
     }
 
+
     public LiveData<CollectionArea> getCollectionArea() {
         return collectionArea;
     }
@@ -62,6 +63,10 @@ public class GameViewModel extends ViewModel {
         //gameModel function to be added
         //gameModel.makeMove();
         notifyStateChange();
+    }
+
+    public void setNumBalloons(int numBalloons){
+        gameModel.setNumBalloons(numBalloons);
     }
 
 
