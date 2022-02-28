@@ -41,6 +41,9 @@ public class GameActivity extends AppCompatActivity {
         //ViewModel Example Code
         viewModel = new ViewModelProvider(this).get(GameViewModel.class);
 
+        gameView = findViewById(R.id.gameView);
+        viewModel.onGameSizeChanged(200, 200);
+        viewModel.setNumBalloons(5);
 
         findViewById(R.id.gameView).addOnLayoutChangeListener(
                 (v, left, top, right, bottom, lastLeft, lastTop, lastRight, lastBottom) -> {
@@ -52,9 +55,6 @@ public class GameActivity extends AppCompatActivity {
         });
 
         viewModel.getCollectionArea().observe(this, collectionArea -> {
-
-            gameView.setBloons();
-
             // Set something in the ui with collection data.
             //this code will run any time the collection area object changes.
             if(collectionArea == null)
@@ -67,7 +67,7 @@ public class GameActivity extends AppCompatActivity {
                                 ", collectionW: " + collectionArea.getWidth());
         });
 
-
+        viewModel.getBalloons().observe(this, bloons -> gameView.setBloons(bloons));
 
         viewModel.getCanMakeMove().observe(this, canMakeMove ->{
             findViewById(R.id.makeMoveButton).setEnabled(canMakeMove);

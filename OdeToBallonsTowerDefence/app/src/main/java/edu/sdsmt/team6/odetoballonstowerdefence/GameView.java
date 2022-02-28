@@ -56,12 +56,8 @@ public class GameView extends View {
         drawBloons(canvas);
     }
 
-    public void setBloons() {
-        bloons = new ArrayList<Balloon>();
-        bloons.add(new Balloon(300, 5, 10, 20));
-        bloons.add(new Balloon(300, 500, 10, 20));
-        bloons.add(new Balloon(100, 200, 10, 20));
-
+    public void setBloons(ArrayList<Balloon> bloons) {
+        this.bloons = bloons;
         invalidate();
     }
 
