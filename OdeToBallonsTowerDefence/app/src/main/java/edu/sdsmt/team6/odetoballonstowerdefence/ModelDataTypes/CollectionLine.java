@@ -10,15 +10,21 @@ public class CollectionLine extends CollectionArea{
 
     @Override
     public void updateSecondaryPoint(int new_xLocation, int new_yLocation) {
-
+        this.width = Math.abs(this.getX() - new_xLocation) + 5;
+        this.height = Math.abs(this.getY()- new_yLocation) + 5;
     }
 
     @Override
     public void checkBalloon(Balloon balloon) {
-        //placeholder for actual logic
-        if(new Random().nextInt(3) == 1){
+        //check if in line!
+        if(new Random().nextInt(100) >=25){//75 percent chance of capture!
             balloon.pop();
         }
 
+    }
+
+    private boolean balloonInArea(Balloon b){
+
+        return false;
     }
 }

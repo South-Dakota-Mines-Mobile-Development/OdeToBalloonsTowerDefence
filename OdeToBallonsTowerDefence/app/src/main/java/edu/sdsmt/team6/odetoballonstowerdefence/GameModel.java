@@ -20,6 +20,7 @@ public class GameModel {
     private PlayerModel playerOne= new PlayerModel("player1");
     private PlayerModel playerTwo = new PlayerModel("player2");
     private int roundNumber = 0;
+    private int roundsToEnd;
     private int collectionAreaType = CollectionArea.RECTANGLE; //default is rectangle
     private int screenWidth;
     private int screenHeight;
@@ -28,6 +29,11 @@ public class GameModel {
         this.screenWidth = screenWidth;
         this.screenHeight = screenHeight;
 
+    }
+
+    public void setPlayerNames(String playerOneName, String playerTwoName){
+        playerOne.setName(playerOneName);
+        playerTwo.setName(playerTwoName);
     }
 
     public void setNumBalloons(int numBalloons){//may want to clear old balloons?
@@ -71,6 +77,7 @@ public class GameModel {
     }
 
     public void updateSecondaryPoint(int x, int y){
+        collectionArea.updateSecondaryPoint(x,y);
     }
 
     public void makeMove(){
@@ -135,5 +142,13 @@ public class GameModel {
         else{
             playerTwo.updateScore(playerTwo.getScore() +1);
         }
+    }
+
+    public void setNumberOfRounds(int round){
+        roundsToEnd = round;
+    }
+
+    public boolean gameIsOver(){
+        return roundsToEnd == roundNumber;
     }
 }
