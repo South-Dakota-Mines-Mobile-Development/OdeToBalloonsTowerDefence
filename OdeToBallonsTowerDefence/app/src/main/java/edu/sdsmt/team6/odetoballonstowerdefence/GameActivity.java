@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 public class GameActivity extends AppCompatActivity {
     private GameViewModel viewModel;
+    private GameView gameView = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,6 +23,9 @@ public class GameActivity extends AppCompatActivity {
             this.getSupportActionBar().hide();
         }
         catch (NullPointerException e){}
+
+        //Get Views
+        gameView = (GameView) findViewById(R.id.gameView);
 
         //Set Player's Names from the main activity screen
         Intent intent = getIntent();
@@ -37,6 +41,9 @@ public class GameActivity extends AppCompatActivity {
         //ViewModel Example Code
         viewModel = new ViewModelProvider(this).get(GameViewModel.class);
 
+        gameView = findViewById(R.id.gameView);
+        viewModel.onGameSizeChanged(200, 200);
+        viewModel.setNumBalloons(5);
 
         findViewById(R.id.gameView).addOnLayoutChangeListener(
                 (v, left, top, right, bottom, lastLeft, lastTop, lastRight, lastBottom) -> {
@@ -60,7 +67,7 @@ public class GameActivity extends AppCompatActivity {
                                 ", collectionW: " + collectionArea.getWidth());
         });
 
-
+        viewModel.getBalloons().observe(this, bloons -> gameView.setBloons(bloons));
 
         viewModel.getCanMakeMove().observe(this, canMakeMove ->{
             findViewById(R.id.makeMoveButton).setEnabled(canMakeMove);
