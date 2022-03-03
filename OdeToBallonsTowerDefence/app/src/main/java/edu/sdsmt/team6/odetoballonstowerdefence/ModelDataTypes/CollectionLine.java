@@ -4,6 +4,9 @@ import java.util.Random;
 
 public class CollectionLine extends CollectionArea{
 
+    private int secondXLoc=0;
+    private int secondYLoc=0;
+
     public CollectionLine(int xLocation, int yLocation, int screenWidth, int screenHeight) {
         super(xLocation, yLocation, screenWidth, screenHeight);
     }
@@ -12,6 +15,8 @@ public class CollectionLine extends CollectionArea{
     public void updateSecondaryPoint(int new_xLocation, int new_yLocation) {
         this.width = Math.abs(this.getX() - new_xLocation) + 5;
         this.height = Math.abs(this.getY()- new_yLocation) + 5;
+        secondXLoc = new_xLocation;
+        secondYLoc = new_yLocation;
     }
 
     @Override
