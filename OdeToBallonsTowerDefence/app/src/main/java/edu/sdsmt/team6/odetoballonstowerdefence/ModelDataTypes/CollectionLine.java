@@ -22,14 +22,24 @@ public class CollectionLine extends CollectionArea{
     @Override
     public void checkBalloon(Balloon balloon) {
         //check if in line!
-        if(new Random().nextInt(100) >=25){//75 percent chance of capture!
-            balloon.pop();
+        if(balloonInArea(balloon)){
+            if(new Random().nextInt(100) >=25){//75 percent chance of capture!
+                balloon.pop();
+            }
         }
-
     }
 
     private boolean balloonInArea(Balloon b){
+        return distanceFromLine(b) < 20.0;
+    }
 
-        return false;
+    private double distanceFromLine(Balloon b) {
+        double xDelta = this.getX() - secondXLoc;
+        double yDelta = this.getY() - secondYLoc;
+        double u = ((b.getX() - this.getX()) * xDelta + (b.getY() - this.getY()) * yDelta) / (xDelta * xDelta + yDelta * yDelta);
+        double tempX = this.getX() + u * xDelta;//closest point online to balloon
+        double tempY = this.getY() + u * yDelta;
+
+        return Math.sqrt(Math.pow(tempX - b.getX(), 2) + Math.pow(tempY - b.getY(), 2));//distance formula
     }
 }
