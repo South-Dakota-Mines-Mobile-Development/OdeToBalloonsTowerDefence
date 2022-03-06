@@ -10,8 +10,8 @@ public class CollectionRectangle extends CollectionArea {
 
     @Override
     public void updateSecondaryPoint(int new_xLocation, int new_yLocation) {
-        this.width = this.getX() - new_xLocation + 5;
-        this.height = this.getY()- new_yLocation + 5;
+        this.width = new_xLocation - this.getX();
+        this.height = new_yLocation - this.getY();
     }
 
     @Override

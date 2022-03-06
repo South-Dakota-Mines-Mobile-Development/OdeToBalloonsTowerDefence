@@ -4,8 +4,6 @@ import java.util.Random;
 
 public class CollectionLine extends CollectionArea{
 
-    private int secondXLoc=0;
-    private int secondYLoc=0;
 
     public CollectionLine(int xLocation, int yLocation, int screenWidth, int screenHeight) {
         super(xLocation, yLocation, screenWidth, screenHeight);
@@ -13,10 +11,8 @@ public class CollectionLine extends CollectionArea{
 
     @Override
     public void updateSecondaryPoint(int new_xLocation, int new_yLocation) {
-        this.width = Math.abs(this.getX() - new_xLocation) + 5;
-        this.height = Math.abs(this.getY()- new_yLocation) + 5;
-        secondXLoc = new_xLocation;
-        secondYLoc = new_yLocation;
+        this.width = new_xLocation - this.getX();
+        this.height = new_yLocation - this.getY();
     }
 
     @Override
@@ -34,6 +30,9 @@ public class CollectionLine extends CollectionArea{
     }
 
     private double distanceFromLine(Balloon b) {
+        int secondXLoc = getX() + width;
+        int secondYLoc = getY() + height;
+
         double xDelta = this.getX() - secondXLoc;
         double yDelta = this.getY() - secondYLoc;
         double u = ((b.getX() - this.getX()) * xDelta + (b.getY() - this.getY()) * yDelta) / (xDelta * xDelta + yDelta * yDelta);

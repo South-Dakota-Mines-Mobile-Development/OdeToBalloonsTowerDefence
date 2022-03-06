@@ -87,7 +87,7 @@
             app:layout_constraintStart_toEndOf="@+id/player1Label" />
 
         <TextView
-            android:id="@+id/player1Score2"
+            android:id="@+id/player2Score"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="16dp"
