@@ -10,8 +10,8 @@ public class CollectionRectangle extends CollectionArea {
 
     @Override
     public void updateSecondaryPoint(int new_xLocation, int new_yLocation) {
-        this.width = Math.abs(this.getX() - new_xLocation) + 5;
-        this.height = Math.abs(this.getY()- new_yLocation) + 5;
+        this.width = this.getX() - new_xLocation + 5;
+        this.height = this.getY()- new_yLocation + 5;
     }
 
     @Override
@@ -24,8 +24,25 @@ public class CollectionRectangle extends CollectionArea {
     }
 
     private boolean balloonInArea(Balloon b){
-        return b.getX() >= this.getX() - 5 && b.getX() <= this.getX() + width &&
-                b.getY() >= this.getY() - 5 && b.getY() <= this.getY() + height;
+        return betweenXCoor(b) && betweenYCoor(b);
+    }
+
+    private boolean betweenXCoor(Balloon b){
+        int oppPointX = this.getX() + width;
+        if(oppPointX < this.getX()){
+            return b.getX() >= oppPointX && b.getX() <= this.getX();
+        }else{
+            return b.getX() >= this.getX() && b.getX() <= oppPointX;
+        }
+    }
+
+    private boolean betweenYCoor(Balloon b){
+        int oppPointY = this.getY() + height;
+        if(oppPointY < this.getX()){
+            return b.getX() >= oppPointY && b.getX() <= this.getX();
+        }else{
+            return b.getX() >= this.getX() && b.getX() <= oppPointY;
+        }
     }
 
     private int chanceOfCapture(){
