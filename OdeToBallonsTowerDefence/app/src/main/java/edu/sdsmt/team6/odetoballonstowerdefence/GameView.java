@@ -123,9 +123,10 @@ public class GameView extends View {
             myPaint.setStrokeWidth(10);
             myPaint.setStyle(Paint.Style.STROKE);
 
-            canvas.drawCircle(collectionArea.getX(),
-                    collectionArea.getY(),
-                    (float)collectionArea.getWidth()/2,
+            CollectionCircle collectionCircle = (CollectionCircle)collectionArea;
+            canvas.drawCircle(collectionCircle.getX(),
+                    collectionCircle.getY(),
+                    collectionCircle.getRadius(),
                     myPaint);
 
         }

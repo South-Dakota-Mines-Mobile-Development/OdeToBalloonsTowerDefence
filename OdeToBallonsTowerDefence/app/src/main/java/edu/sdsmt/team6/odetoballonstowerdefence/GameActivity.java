@@ -86,7 +86,7 @@ public class GameActivity extends AppCompatActivity {
         viewModel.setPlayerNames(playerOneName, playerTwoName);
 
         //Need to replace with activity switcher
-        viewModel.onChangeCollectionAreaType(CollectionArea.RECTANGLE);
+        viewModel.onChangeCollectionAreaType(CollectionArea.CIRCLE);
 
     }
 }

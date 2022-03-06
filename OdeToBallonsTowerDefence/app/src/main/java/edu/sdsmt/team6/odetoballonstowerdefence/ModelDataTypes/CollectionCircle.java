@@ -8,6 +8,10 @@ public class CollectionCircle extends CollectionArea {
         super(xLocation, yLocation, screenWidth, screenHeight);
     }
 
+    public int getRadius(){
+        return radius;
+    }
+
     @Override
     public void updateSecondaryPoint(int new_xLocation, int new_yLocation) {
         int x_width = Math.abs(getX() - new_xLocation);
@@ -35,5 +39,7 @@ public class CollectionCircle extends CollectionArea {
         return b.getX() >= this.getX() - radius && b.getX() <= this.getX() + radius &&
                 b.getY() >= this.getY() - radius && b.getY() <= this.getY() + radius;
     }
+
+
 
 }
