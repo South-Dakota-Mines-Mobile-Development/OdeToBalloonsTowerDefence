@@ -6,12 +6,12 @@
         <type value="RUNNING_DEVICE_TARGET" />
         <deviceKey>
           <Key>
-            <type value="SERIAL_NUMBER" />
-            <value value="adb-0A201FDD400242-KAWHal._adb-tls-connect._tcp" />
+            <type value="VIRTUAL_DEVICE_PATH" />
+            <value value="C:\Users\Dalton\.android\avd\5.1_WVGA_API_23.avd" />
           </Key>
         </deviceKey>
       </Target>
     </runningDeviceTargetSelectedWithDropDown>
-    <timeTargetWasSelectedWithDropDown value="2022-03-07T22:40:13.528858500Z" />
+    <timeTargetWasSelectedWithDropDown value="2022-03-07T23:05:47.442689700Z" />
   </component>
 </project>

@@ -25,7 +25,7 @@
         android:backgroundTintMode="src_atop"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.507"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent">
 
         <TextView
@@ -96,6 +96,26 @@
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="@+id/player2Label"
             app:layout_constraintEnd_toStartOf="@+id/player2Label" />
+
+        <TextView
+            android:id="@+id/roundLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/roundLabel"
+            android:textColor="#3E2723"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/roundCounter"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/roundCounterInitialValue"
+            android:textColor="#3E2723"
+            app:layout_constraintEnd_toEndOf="@+id/roundLabel"
+            app:layout_constraintStart_toStartOf="@+id/roundLabel"
+            app:layout_constraintTop_toBottomOf="@+id/roundLabel" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

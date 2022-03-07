@@ -77,11 +77,23 @@ public class GameActivity extends AppCompatActivity {
         });
 
         viewModel.getCurrentPlayerTurn().observe(this, playerTurn ->{
-            //Indicate who's turn it is
+            switch(playerTurn){
+                case PLAYER_ONE:
+                    ((TextView)findViewById(R.id.player1Label))
+                            .setText(R.string.player1LabelActive);
+                    ((TextView)findViewById(R.id.player2Label)).setText(R.string.player2Label);
+                    break;
+                case PLAYER_TWO:
+                    ((TextView)findViewById(R.id.player2Label))
+                            .setText(R.string.player2LabelActive);
+                    ((TextView)findViewById(R.id.player1Label)).setText(R.string.player1Label);
+                    break;
+            }
         });
 
         viewModel.getCurrentRoundNumber().observe(this, roundNumber ->{
-            //Set Round Number
+            ((TextView)findViewById(R.id.roundCounter))
+                    .setText(String.valueOf(roundNumber));
         });
 
         findViewById(R.id.makeMoveButton)
@@ -96,9 +108,12 @@ public class GameActivity extends AppCompatActivity {
         String playerTwoName = intent.getStringExtra("edu.sdsmt.bloons.PlayerTwoName");
         viewModel.setNumBalloons(5);
         viewModel.setPlayerNames(playerOneName, playerTwoName);
+        ((TextView)findViewById(R.id.player1Label))
+                .setText(R.string.player1LabelActive);
 
         //Need to replace with activity switcher
         viewModel.onChangeCollectionAreaType(CollectionArea.RECTANGLE);
+        viewModel.setNumOfRounds(5);
 
     }
 }
