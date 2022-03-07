@@ -8,19 +8,22 @@ public class CollectionCircle extends CollectionArea {
         super(xLocation, yLocation, screenWidth, screenHeight);
     }
 
+    public int getRadius(){
+        return radius;
+    }
+
     @Override
     public void updateSecondaryPoint(int new_xLocation, int new_yLocation) {
         int x_width = Math.abs(getX() - new_xLocation);
         int y_width = Math.abs(getY() - new_yLocation);
+        this.radius = (int)distanceFormula(getX(), getY(), new_xLocation, new_yLocation);
         if(x_width > y_width){
             this.width = x_width + 5;
             this.height = x_width + 5;
-            this.radius = x_width + 5;
         }
         else{
             this.width = y_width + 5;
             this.height = y_width + 5;
-            this.radius = y_width + 5;
         }
     }
 
@@ -32,8 +35,6 @@ public class CollectionCircle extends CollectionArea {
     }
 
     private boolean balloonInArea(Balloon b){
-        return b.getX() >= this.getX() - radius && b.getX() <= this.getX() + radius &&
-                b.getY() >= this.getY() - radius && b.getY() <= this.getY() + radius;
+        return distanceFormula(getX(), getY(), b.getX(), b.getY()) < radius + 5;
     }
-
 }

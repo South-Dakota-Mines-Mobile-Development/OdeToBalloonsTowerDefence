@@ -4,9 +4,19 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
 
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.Paint;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.widget.TextView;
+
+import java.util.Objects;
+
+import edu.sdsmt.team6.odetoballonstowerdefence.ModelDataTypes.CollectionArea;
+import edu.sdsmt.team6.odetoballonstowerdefence.ModelDataTypes.CollectionCircle;
+import edu.sdsmt.team6.odetoballonstowerdefence.ModelDataTypes.CollectionLine;
+import edu.sdsmt.team6.odetoballonstowerdefence.ModelDataTypes.CollectionRectangle;
 
 public class GameActivity extends AppCompatActivity {
     private GameViewModel viewModel;
@@ -20,51 +30,39 @@ public class GameActivity extends AppCompatActivity {
         //Disables the top action bar
         try
         {
-            this.getSupportActionBar().hide();
+            Objects.requireNonNull(this.getSupportActionBar()).hide();
         }
-        catch (NullPointerException e){}
+        catch (NullPointerException ignored){}
+
+        DisplayMetrics displayMetrics = new DisplayMetrics();
+        getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
+
+        int gameViewSize = Math.min(displayMetrics.widthPixels, displayMetrics.heightPixels);
 
         //Get Views
-        gameView = (GameView) findViewById(R.id.gameView);
-
-        //Set Player's Names from the main activity screen
-        Intent intent = getIntent();
-        String playerOneName = intent.getStringExtra("edu.sdsmt.bloons.PlayerOneName");
-        String playerTwoName = intent.getStringExtra("edu.sdsmt.bloons.PlayerTwoName");
-
-        TextView playerOneTextView = findViewById(R.id.player1Name);
-        TextView playerTwoTextView = findViewById(R.id.player2Name);
-        playerOneTextView.setText(playerOneName);
-        playerTwoTextView.setText(playerTwoName);
-
-
-        //ViewModel Example Code
-        viewModel = new ViewModelProvider(this).get(GameViewModel.class);
-
         gameView = findViewById(R.id.gameView);
-        viewModel.onGameSizeChanged(200, 200);
-        viewModel.setNumBalloons(5);
+        viewModel = new ViewModelProvider(this).get(GameViewModel.class);
+        viewModel.onGameSizeChanged(gameViewSize, gameViewSize);
+        gameView.setViewModel(viewModel);
+
 
         findViewById(R.id.gameView).addOnLayoutChangeListener(
                 (v, left, top, right, bottom, lastLeft, lastTop, lastRight, lastBottom) -> {
                     viewModel.onGameSizeChanged(v.getWidth(), v.getHeight());
         });
 
-        findViewById(R.id.gameView).setOnClickListener(v -> {
-            viewModel.onInitialPress(0, 0);
+        viewModel.getPlayerOne().observe(this, playerOne -> {
+            ((TextView)findViewById(R.id.player1Name)).setText(playerOne.getName());
+            ((TextView)findViewById(R.id.player1Score)).setText(String.valueOf(playerOne.getScore()));
+        });
+
+        viewModel.getPlayerTwo().observe(this, playerTwo -> {
+            ((TextView)findViewById(R.id.player2Name)).setText(playerTwo.getName());
+            ((TextView)findViewById(R.id.player2Score)).setText(String.valueOf(playerTwo.getScore()));
         });
 
         viewModel.getCollectionArea().observe(this, collectionArea -> {
-            // Set something in the ui with collection data.
-            //this code will run any time the collection area object changes.
-            if(collectionArea == null)
-                Log.i("GameActivity", "collectionArea null");
-            else
-                Log.i("GameActivity",
-                        "collectionX: " + collectionArea.getX() +
-                                ", collectionY: " + collectionArea.getY() +
-                                ", CollectionH: " + collectionArea.getHeight() +
-                                ", collectionW: " + collectionArea.getWidth());
+            gameView.setCollectionArea(collectionArea);
         });
 
         viewModel.getBalloons().observe(this, bloons -> gameView.setBloons(bloons));
@@ -79,6 +77,16 @@ public class GameActivity extends AppCompatActivity {
 
         findViewById(R.id.resetMove)
                 .setOnClickListener(v -> viewModel.onResetCollectionArea());
+
+
+        Intent intent = getIntent();
+        String playerOneName = intent.getStringExtra("edu.sdsmt.bloons.PlayerOneName");
+        String playerTwoName = intent.getStringExtra("edu.sdsmt.bloons.PlayerTwoName");
+        viewModel.setNumBalloons(5);
+        viewModel.setPlayerNames(playerOneName, playerTwoName);
+
+        //Need to replace with activity switcher
+        viewModel.onChangeCollectionAreaType(CollectionArea.LINE);
 
     }
 }

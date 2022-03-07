@@ -12,11 +12,11 @@ import edu.sdsmt.team6.odetoballonstowerdefence.ModelDataTypes.PlayerModel;
 
 public class GameModel {
 
-    public enum Playerturn{PLAYERONE, PLAYERTWO}
+    public enum PlayerTurn {PLAYER_ONE, PLAYER_TWO}
 
     private ArrayList<Balloon> balloons = new ArrayList<>();
     private CollectionArea collectionArea = null;
-    private Playerturn playerTurn = Playerturn.PLAYERONE;
+    private PlayerTurn playerTurn = PlayerTurn.PLAYER_ONE;
     private PlayerModel playerOne= new PlayerModel("player1");
     private PlayerModel playerTwo = new PlayerModel("player2");
     private int roundNumber = 0;
@@ -24,6 +24,7 @@ public class GameModel {
     private int collectionAreaType = CollectionArea.RECTANGLE; //default is rectangle
     private int screenWidth;
     private int screenHeight;
+    private Boolean initialized = false;
 
     public void setScreenSize(int screenWidth, int screenHeight){//may need to move balloons location?
         this.screenWidth = screenWidth;
@@ -37,23 +38,29 @@ public class GameModel {
     }
 
     public void setNumBalloons(int numBalloons){//may want to clear old balloons?
-        Random rand = new Random();
+        if(!initialized){
+            Random rand = new Random();
+            for (int i = 0; i < numBalloons; i++) {
+                //arbitrarily adding a 10 pixel padding around the screen
+                int locX = rand.nextInt(screenWidth-20) + 10;
+                int locY = rand.nextInt(screenHeight-20) + 10;
 
-        for (int i = 0; i < numBalloons; i++) {
-            //arbitrarily adding a 10 pixel padding around the screen
-            int locX = rand.nextInt(screenWidth-20) + 10;
-            int locY = rand.nextInt(screenHeight-20) + 10;
-
-            balloons.add(new Balloon(locX, locY));
+                balloons.add(new Balloon(locX, locY));
+            }
+            initialized = true;
         }
     }
 
+    public PlayerTurn getPlayerTurn(){
+        return playerTurn;
+    }
+
     public void updateTurn(){
-        if(playerTurn == Playerturn.PLAYERONE){
-            playerTurn = Playerturn.PLAYERTWO;
+        if(playerTurn == PlayerTurn.PLAYER_ONE){
+            playerTurn = PlayerTurn.PLAYER_TWO;
         }
         else {
-            playerTurn = Playerturn.PLAYERONE;
+            playerTurn = PlayerTurn.PLAYER_ONE;
         }
     }
 
@@ -69,10 +76,13 @@ public class GameModel {
         switch(collectionAreaType){
             case CollectionArea.RECTANGLE:
                 collectionArea = new CollectionRectangle(x, y, screenWidth, screenHeight);
+                break;
             case CollectionArea.CIRCLE:
                 collectionArea = new CollectionCircle(x, y, screenWidth, screenHeight);
+                break;
             case CollectionArea.LINE:
-                collectionArea = new CollectionLine(x, y, screenWidth, screenHeight);
+                collectionArea = new CollectionLine(screenWidth/2, screenHeight, screenWidth, screenHeight);
+                break;
         }
     }
 
@@ -83,7 +93,7 @@ public class GameModel {
     public void makeMove(){
         checkBalloons();
         closeCollectArea();
-        if(playerTurn ==Playerturn.PLAYERTWO){
+        if(playerTurn == PlayerTurn.PLAYER_TWO){
             updateRound();
         }
         updateTurn();
@@ -110,16 +120,12 @@ public class GameModel {
         return unPoppedBalloons;
     }
 
-    public int getNumPopped(){
-        int popped = 0;
+    public PlayerModel GetPlayerOne(){
+        return playerOne;
+    }
 
-        for (Balloon balloon: balloons) {
-            if(balloon.isPopped()){
-                popped++;
-            }
-        }
-
-        return popped;
+    public PlayerModel GetPlayerTwo(){
+        return playerTwo;
     }
 
     public CollectionArea getCollectionArea(){
@@ -127,7 +133,7 @@ public class GameModel {
     }
 
     private void checkBalloons(){
-        for (Balloon balloon: balloons) {
+        for (Balloon balloon: getBalloons()) {
             collectionArea.checkBalloon(balloon);
             if(balloon.isPopped()){
                 addToPlayersList(balloon);
@@ -136,7 +142,7 @@ public class GameModel {
     }
 
     private void addToPlayersList(Balloon b){
-        if(playerTurn == Playerturn.PLAYERONE){
+        if(playerTurn == PlayerTurn.PLAYER_ONE){
             playerOne.updateScore(playerOne.getScore() +1);
         }
         else{
@@ -149,6 +155,6 @@ public class GameModel {
     }
 
     public boolean gameIsOver(){
-        return roundsToEnd == roundNumber;
+        return roundsToEnd == roundNumber || getBalloons().size() == 0;
     }
 }

@@ -4,8 +4,6 @@ import java.util.Random;
 
 public class CollectionLine extends CollectionArea{
 
-    private int secondXLoc=0;
-    private int secondYLoc=0;
 
     public CollectionLine(int xLocation, int yLocation, int screenWidth, int screenHeight) {
         super(xLocation, yLocation, screenWidth, screenHeight);
@@ -13,10 +11,24 @@ public class CollectionLine extends CollectionArea{
 
     @Override
     public void updateSecondaryPoint(int new_xLocation, int new_yLocation) {
-        this.width = Math.abs(this.getX() - new_xLocation) + 5;
-        this.height = Math.abs(this.getY()- new_yLocation) + 5;
-        secondXLoc = new_xLocation;
-        secondYLoc = new_yLocation;
+        double lengthOfLine = distanceFormula(getX(), getY(), new_xLocation, new_yLocation);
+        if(lengthOfLine >= screenWidth * 0.2 && lengthOfLine <= screenWidth * 0.8){
+            this.width = new_xLocation - this.getX();
+            this.height = new_yLocation - this.getY();
+        }
+        else if(lengthOfLine <= screenWidth* 0.2){
+            this.width = adjustCoordinateForDistance(getX(), new_xLocation, lengthOfLine, screenWidth * 0.2) - this.getX();
+            this.height = adjustCoordinateForDistance(getY(), new_yLocation, lengthOfLine, screenWidth * 0.2) - this.getY();
+        }
+        else if(distanceFormula(getX(), getY(), new_xLocation, new_yLocation) >= screenWidth* 0.8){
+            this.width = adjustCoordinateForDistance(getX(), new_xLocation, lengthOfLine, screenWidth * 0.8) - this.getX();
+            this.height = adjustCoordinateForDistance(getY(), new_yLocation, lengthOfLine, screenWidth * 0.8) - this.getY();
+        }
+    }
+
+    private int adjustCoordinateForDistance(int v1, int v2, double currentLength, double desiredLength){
+        double delta = (v2 - v1)/ currentLength;
+        return (int)(v1 + (desiredLength) * delta);
     }
 
     @Override
@@ -30,16 +42,20 @@ public class CollectionLine extends CollectionArea{
     }
 
     private boolean balloonInArea(Balloon b){
-        return distanceFromLine(b) < 20.0;
+        return distanceFromLine(b) < 40.0;
     }
 
     private double distanceFromLine(Balloon b) {
+        int secondXLoc = getX() + width;
+        int secondYLoc = getY() + height;
+
         double xDelta = this.getX() - secondXLoc;
         double yDelta = this.getY() - secondYLoc;
         double u = ((b.getX() - this.getX()) * xDelta + (b.getY() - this.getY()) * yDelta) / (xDelta * xDelta + yDelta * yDelta);
-        double tempX = this.getX() + u * xDelta;//closest point online to balloon
+        double tempX = this.getX() + u * xDelta;//closest point on line to balloon
         double tempY = this.getY() + u * yDelta;
 
-        return Math.sqrt(Math.pow(tempX - b.getX(), 2) + Math.pow(tempY - b.getY(), 2));//distance formula
+        return distanceFormula(b.getX(), b.getY(), tempX, tempY);
     }
+
 }
