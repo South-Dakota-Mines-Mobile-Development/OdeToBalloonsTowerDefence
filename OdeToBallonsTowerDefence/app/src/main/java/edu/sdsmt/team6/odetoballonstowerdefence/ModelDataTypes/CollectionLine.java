@@ -1,7 +1,5 @@
 package edu.sdsmt.team6.odetoballonstowerdefence.ModelDataTypes;
 
-import android.util.Log;
-
 import java.util.Random;
 
 public class CollectionLine extends CollectionArea{
@@ -44,7 +42,7 @@ public class CollectionLine extends CollectionArea{
     }
 
     private boolean balloonInArea(Balloon b){
-        return distanceFromLine(b) < 25.0;
+        return distanceFromLine(b) < 40.0;
     }
 
     private double distanceFromLine(Balloon b) {
