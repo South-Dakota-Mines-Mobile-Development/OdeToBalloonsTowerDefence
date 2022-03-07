@@ -17,4 +17,8 @@
     <string name="dartBtn">select dart</string>
     <string name="make_move">Make Move</string>
     <string name="reset_move">Reset Move</string>
+    <string name="selectModeBtn">Select Mode</string>
+    <string name="howToPlayTitle">How to Play</string>
+    <string name="howToBackBtn">Back to Start</string>
+    <string name="howToPlayActivityBtn">How To Play</string>
 </resources>

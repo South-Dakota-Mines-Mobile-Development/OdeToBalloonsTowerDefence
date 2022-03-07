@@ -3,6 +3,7 @@ package edu.sdsmt.team6.odetoballonstowerdefence;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
@@ -20,6 +21,9 @@ public class MainActivity extends AppCompatActivity {
         }
         catch (NullPointerException e){}
 
+        MediaPlayer mainTheme= MediaPlayer.create(MainActivity.this,R.raw.maintheme);
+        mainTheme.start();
+
         setContentView(R.layout.activity_main);
 
     }
@@ -35,6 +39,12 @@ public class MainActivity extends AppCompatActivity {
 
         intent.putExtra("edu.sdsmt.bloons.PlayerOneName", playerOne);
         intent.putExtra("edu.sdsmt.bloons.PlayerTwoName", playerTwo);
+
+        startActivity(intent);
+    }
+
+    public void howToActivity(View view) {
+        Intent intent = new Intent(this, HowToActivity.class);
 
         startActivity(intent);
     }

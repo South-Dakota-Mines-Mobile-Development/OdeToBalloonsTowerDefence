@@ -85,12 +85,13 @@ public class GameView extends View {
 
     public void setCollectionArea(CollectionArea collectionArea){
         this.collectionArea = collectionArea;
-        invalidate();
+
     }
 
     public void setBloons(ArrayList<Balloon> bloons) {
-        this.bloons = bloons;
-        invalidate();
+            this.bloons = bloons;
+            invalidate();
+
     }
 
     private  void drawBloons(Canvas canvas) {
@@ -99,7 +100,8 @@ public class GameView extends View {
             Log.i("Bloon Coordinates", "X Val: " + b.getX());
             Bitmap resizedBloon = Bitmap.createScaledBitmap(
                     redBloon, (int)(redBloon.getWidth() * 0.4), (int)(redBloon.getHeight() * 0.4), false);
-            canvas.drawBitmap(resizedBloon, b.getX() - 74, b.getY() - 94, null);
+            canvas.drawBitmap(resizedBloon, b.getX()- (int)(redBloon.getWidth() * 0.4 / 2),
+                    b.getY()- (int)(redBloon.getHeight() * 0.4 / 2), null);
         }
     }
 
