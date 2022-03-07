@@ -15,25 +15,23 @@ public class CollectionLine extends CollectionArea{
         if(lengthOfLine >= screenWidth * 0.2 && lengthOfLine <= screenWidth * 0.8){
             this.width = new_xLocation - this.getX();
             this.height = new_yLocation - this.getY();
+            return;
         }
         else if(lengthOfLine <= screenWidth* 0.2){
-            double dx = (new_xLocation - this.getX())/ lengthOfLine;
-            double dy = (new_yLocation - getY())/ lengthOfLine;
-            int newX = (int)(getX() + (screenWidth * 0.2) * dx);
-            int newY = (int)(getY() + (screenWidth * 0.2) * dy);
-
-            this.width = newX - this.getX();
-            this.height = newY - this.getY();
+            this.width = adjustCoordinateForDistance(getX(), new_xLocation, lengthOfLine, screenWidth * 0.2) - this.getX();
+            this.height = adjustCoordinateForDistance(getY(), new_yLocation, lengthOfLine, screenWidth * 0.2) - this.getY();
+            return;
         }
         else if(distanceFormula(getX(), getY(), new_xLocation, new_yLocation) >= screenWidth* 0.8){
-            double dx = (new_xLocation - this.getX())/ lengthOfLine;
-            double dy = (new_yLocation - getY())/ lengthOfLine;
-            int newX = (int)(getX() + (screenWidth * 0.8) * dx);
-            int newY = (int)(getY() + (screenWidth * 0.8) * dy);
-
-            this.width = newX - this.getX();
-            this.height = newY - this.getY();
+            this.width = adjustCoordinateForDistance(getX(), new_xLocation, lengthOfLine, screenWidth * 0.8) - this.getX();
+            this.height = adjustCoordinateForDistance(getY(), new_yLocation, lengthOfLine, screenWidth * 0.8) - this.getY();
+            return;
         }
+    }
+
+    private int adjustCoordinateForDistance(int v1, int v2, double currentLength, double desiredLength){
+        double delta = (v2 - v1)/ currentLength;
+        return (int)(v1 + (desiredLength) * delta);
     }
 
     @Override
