@@ -72,6 +72,18 @@ public class GameActivity extends AppCompatActivity {
             findViewById(R.id.resetMove).setEnabled(canMakeMove);
         });
 
+        viewModel.getIsGameOver().observe(this, isGameOver ->{
+            //Handle the game end screen
+        });
+
+        viewModel.getCurrentPlayerTurn().observe(this, playerTurn ->{
+            //Indicate who's turn it is
+        });
+
+        viewModel.getCurrentRoundNumber().observe(this, roundNumber ->{
+            //Set Round Number
+        });
+
         findViewById(R.id.makeMoveButton)
                 .setOnClickListener(v -> viewModel.onMakeMove());
 
@@ -86,7 +98,7 @@ public class GameActivity extends AppCompatActivity {
         viewModel.setPlayerNames(playerOneName, playerTwoName);
 
         //Need to replace with activity switcher
-        viewModel.onChangeCollectionAreaType(CollectionArea.LINE);
+        viewModel.onChangeCollectionAreaType(CollectionArea.RECTANGLE);
 
     }
 }

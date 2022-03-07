@@ -8,6 +8,7 @@ import java.util.ArrayList;
 
 import edu.sdsmt.team6.odetoballonstowerdefence.ModelDataTypes.Balloon;
 import edu.sdsmt.team6.odetoballonstowerdefence.ModelDataTypes.CollectionArea;
+import edu.sdsmt.team6.odetoballonstowerdefence.ModelDataTypes.CollectionRectangle;
 import edu.sdsmt.team6.odetoballonstowerdefence.ModelDataTypes.PlayerModel;
 
 public class GameViewModel extends ViewModel {
@@ -16,6 +17,9 @@ public class GameViewModel extends ViewModel {
     private final MutableLiveData<Boolean> canMakeMove = new MutableLiveData<>();
     private final MutableLiveData<PlayerModel> playerOne = new MutableLiveData<>();
     private final MutableLiveData<PlayerModel> playerTwo = new MutableLiveData<>();
+    private final MutableLiveData<Integer> currentRoundNumber = new MutableLiveData<>();
+    private final MutableLiveData<GameModel.PlayerTurn> currentPlayerTurn = new MutableLiveData<>();
+    private final MutableLiveData<Boolean> isGameOver = new MutableLiveData<>();
     private final GameModel gameModel;
 
     public GameViewModel(){
@@ -31,6 +35,10 @@ public class GameViewModel extends ViewModel {
     public void setPlayerNames(String playerOneName, String playerTwoName){
         gameModel.setPlayerNames(playerOneName, playerTwoName);
         notifyStateChange();
+    }
+
+    public void setNumOfRounds(int numRounds){
+        gameModel.setNumberOfRounds(numRounds);
     }
 
     public LiveData<CollectionArea> getCollectionArea() {
@@ -51,6 +59,18 @@ public class GameViewModel extends ViewModel {
 
     public LiveData<PlayerModel> getPlayerTwo(){
         return playerTwo;
+    }
+
+    public LiveData<Integer> getCurrentRoundNumber(){
+        return currentRoundNumber;
+    }
+
+    public LiveData<GameModel.PlayerTurn> getCurrentPlayerTurn(){
+        return currentPlayerTurn;
+    }
+
+    public LiveData<Boolean> getIsGameOver(){
+        return isGameOver;
     }
 
 
@@ -91,6 +111,8 @@ public class GameViewModel extends ViewModel {
         canMakeMove.setValue(gameModel.getCollectionArea() != null);
         playerOne.setValue(gameModel.GetPlayerOne());
         playerTwo.setValue(gameModel.GetPlayerTwo());
+        currentRoundNumber.setValue(gameModel.getRound());
+        currentPlayerTurn.setValue(gameModel.getPlayerTurn());
+        isGameOver.setValue(gameModel.gameIsOver());
     }
-
 }
