@@ -1,5 +1,7 @@
 package edu.sdsmt.team6.odetoballonstowerdefence.ModelDataTypes;
 
+import android.util.Log;
+
 import java.util.Random;
 
 public class CollectionLine extends CollectionArea{
@@ -15,17 +17,14 @@ public class CollectionLine extends CollectionArea{
         if(lengthOfLine >= screenWidth * 0.2 && lengthOfLine <= screenWidth * 0.8){
             this.width = new_xLocation - this.getX();
             this.height = new_yLocation - this.getY();
-            return;
         }
         else if(lengthOfLine <= screenWidth* 0.2){
             this.width = adjustCoordinateForDistance(getX(), new_xLocation, lengthOfLine, screenWidth * 0.2) - this.getX();
             this.height = adjustCoordinateForDistance(getY(), new_yLocation, lengthOfLine, screenWidth * 0.2) - this.getY();
-            return;
         }
         else if(distanceFormula(getX(), getY(), new_xLocation, new_yLocation) >= screenWidth* 0.8){
             this.width = adjustCoordinateForDistance(getX(), new_xLocation, lengthOfLine, screenWidth * 0.8) - this.getX();
             this.height = adjustCoordinateForDistance(getY(), new_yLocation, lengthOfLine, screenWidth * 0.8) - this.getY();
-            return;
         }
     }
 
@@ -45,7 +44,7 @@ public class CollectionLine extends CollectionArea{
     }
 
     private boolean balloonInArea(Balloon b){
-        return distanceFromLine(b) < 20.0;
+        return distanceFromLine(b) < 25.0;
     }
 
     private double distanceFromLine(Balloon b) {
@@ -61,7 +60,4 @@ public class CollectionLine extends CollectionArea{
         return distanceFormula(b.getX(), b.getY(), tempX, tempY);
     }
 
-    private double distanceFormula(double x1, double y1, double x2, double y2){
-        return Math.sqrt( (x2 - x1)*(x2 - x1) + (y2 - y1)*(y2 - y1));
-    }
 }
