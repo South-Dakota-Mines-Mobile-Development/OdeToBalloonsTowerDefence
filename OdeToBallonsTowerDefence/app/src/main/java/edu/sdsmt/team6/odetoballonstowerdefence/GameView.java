@@ -110,9 +110,9 @@ public class GameView extends View {
                     collectionArea.getX() + collectionArea.getWidth());
             int right = Math.max(collectionArea.getX(),
                             collectionArea.getX() + collectionArea.getWidth());
-            int top = Math.min(collectionArea.getX(),
+            int top = Math.min(collectionArea.getY(),
                     collectionArea.getY() + collectionArea.getHeight());
-            int bottom = Math.max(collectionArea.getX(),
+            int bottom = Math.max(collectionArea.getY(),
                     collectionArea.getY() + collectionArea.getHeight());
 
             Paint myPaint = new Paint();
