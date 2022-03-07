@@ -48,6 +48,10 @@ public class GameModel {
         }
     }
 
+    public PlayerTurn getPlayerTurn(){
+        return playerTurn;
+    }
+
     public void updateTurn(){
         if(playerTurn == PlayerTurn.PLAYER_ONE){
             playerTurn = PlayerTurn.PLAYER_TWO;
@@ -126,12 +130,10 @@ public class GameModel {
     }
 
     private void checkBalloons(){
-        for (Balloon balloon: balloons) {
-            if(!balloon.isPopped()){
-                collectionArea.checkBalloon(balloon);
-                if(balloon.isPopped()){
-                    addToPlayersList(balloon);
-                }
+        for (Balloon balloon: getBalloons()) {
+            collectionArea.checkBalloon(balloon);
+            if(balloon.isPopped()){
+                addToPlayersList(balloon);
             }
         }
     }
@@ -150,6 +152,6 @@ public class GameModel {
     }
 
     public boolean gameIsOver(){
-        return roundsToEnd == roundNumber;
+        return roundsToEnd == roundNumber || getBalloons().size() == 0;
     }
 }

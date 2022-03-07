@@ -46,16 +46,16 @@ public class CollectionRectangle extends CollectionArea {
     }
 
     private int chanceOfCapture(){
-        if( (float)(width*height)/ (this.screenHeight * screenWidth) < 0.15){
+        if( (float)(width*height)/ (this.screenHeight * screenWidth) < 0.30){
             return 50;
         }
-        else if( (float)(width*height)/ (this.screenHeight * screenWidth) < 0.25){
+        else if( (float)(width*height)/ (this.screenHeight * screenWidth) < 0.50){
             return 40;
         }
-        else if( (float)(width*height)/ (this.screenHeight * screenWidth) < 0.35){
+        else if( (float)(width*height)/ (this.screenHeight * screenWidth) < 0.70){
             return 30;
         }
-        else if( (float)(width*height)/ (this.screenHeight * screenWidth) < 0.45){
+        else if( (float)(width*height)/ (this.screenHeight * screenWidth) < 0.85){
             return 20;
         }
         return 1;// your saying I got a chance!

@@ -36,7 +36,7 @@ public class CollectionLine extends CollectionArea{
         double xDelta = this.getX() - secondXLoc;
         double yDelta = this.getY() - secondYLoc;
         double u = ((b.getX() - this.getX()) * xDelta + (b.getY() - this.getY()) * yDelta) / (xDelta * xDelta + yDelta * yDelta);
-        double tempX = this.getX() + u * xDelta;//closest point online to balloon
+        double tempX = this.getX() + u * xDelta;//closest point on line to balloon
         double tempY = this.getY() + u * yDelta;
 
         return Math.sqrt(Math.pow(tempX - b.getX(), 2) + Math.pow(tempY - b.getY(), 2));//distance formula

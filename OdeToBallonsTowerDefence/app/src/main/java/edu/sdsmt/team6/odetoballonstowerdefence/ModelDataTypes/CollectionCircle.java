@@ -39,7 +39,4 @@ public class CollectionCircle extends CollectionArea {
         return b.getX() >= this.getX() - radius && b.getX() <= this.getX() + radius &&
                 b.getY() >= this.getY() - radius && b.getY() <= this.getY() + radius;
     }
-
-
-
 }
