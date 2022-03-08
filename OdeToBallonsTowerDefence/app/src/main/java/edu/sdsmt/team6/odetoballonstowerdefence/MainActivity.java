@@ -11,7 +11,6 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
-    Spinner numberDropdown = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,7 +29,7 @@ public class MainActivity extends AppCompatActivity {
 
         setContentView(R.layout.activity_main);
 
-        numberDropdown = findViewById(R.id.numberSpinner);
+        Spinner numberDropdown = findViewById(R.id.numberSpinner);
         Integer[] numbers = new Integer[]{3, 5, 10};
         ArrayAdapter<Integer> adapter = new ArrayAdapter<Integer>(this,android.R.layout.simple_spinner_dropdown_item, numbers);
         numberDropdown.setAdapter(adapter);
@@ -45,6 +44,7 @@ public class MainActivity extends AppCompatActivity {
         TextView secondNameInput = (TextView)findViewById(R.id.playerTwoTextbox);
         String playerTwo = secondNameInput.getText().toString();
 
+        Spinner numberDropdown = findViewById(R.id.numberSpinner);
         Integer roundNumber = (Integer)numberDropdown.getSelectedItem();
 
         intent.putExtra("edu.sdsmt.bloons.roundNumber", roundNumber);
