@@ -37,59 +37,62 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/player1NameF"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="@string/p1_name"
-        android:textSize="48sp"
-        app:layout_constraintBottom_toTopOf="@+id/player1ScoreF"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/finalRoundCnt" />
-
-    <TextView
-        android:id="@+id/player2NameF"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:text="@string/p2_name"
-        android:textSize="48sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/player1ScoreF" />
-
-    <TextView
-        android:id="@+id/player1ScoreF"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="32dp"
-        android:text="@string/finalScoreP1"
-        android:textSize="48sp"
-        app:layout_constraintBottom_toTopOf="@+id/player2NameF"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/player1NameF" />
-
-    <TextView
-        android:id="@+id/player2ScoreF"
-        android:layout_width="wrap_content"
-        android:layout_height="65dp"
-        android:text="@string/FinalScoreP2"
-        android:textSize="48sp"
-        app:layout_constraintBottom_toTopOf="@+id/backtoStartBtn2"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/player2NameF"
-        app:layout_constraintVertical_bias="0.0" />
-
-    <TextView
         android:id="@+id/finalRoundCnt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Rounds: 5"
+        android:text="@string/rounds_5"
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/gameOver" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintBottom_toTopOf="@+id/backtoStartBtn2"
+        app:layout_constraintTop_toBottomOf="@+id/finalRoundCnt">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/player2NameF"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="32dp"
+                android:text="@string/p2_name"
+                android:textAlignment="center"
+                android:textSize="48sp" />
+
+            <TextView
+                android:id="@+id/player1ScoreF"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="32dp"
+                android:text="@string/finalScoreP1"
+                android:textAlignment="center"
+                android:textSize="48sp" />
+
+            <TextView
+                android:id="@+id/player1NameF"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="@string/p1_name"
+                android:textAlignment="center"
+                android:textSize="48sp" />
+
+            <TextView
+                android:id="@+id/player2ScoreF"
+                android:layout_width="match_parent"
+                android:layout_height="65dp"
+                android:text="@string/FinalScoreP2"
+                android:textAlignment="center"
+                android:textSize="48sp" />
+        </LinearLayout>
+    </ScrollView>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
