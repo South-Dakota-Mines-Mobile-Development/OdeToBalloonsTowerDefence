@@ -21,4 +21,22 @@
     <string name="howToPlayTitle">How to Play</string>
     <string name="howToBackBtn">Back to Start</string>
     <string name="howToPlayActivityBtn">How To Play</string>
+    <string name="howToPlayText">
+        1. Enter names of player in the fields, Player 1 will go first.\n
+        2. Enter how many rounds you want the game to go for.\n
+        3. Press "Start Game" to begin game\n
+        4. Players will take turn trying to hit balloons center using their selected item\n
+        \tNote The collection of Rectangle and Line is random!! Do note that random mean you can
+            try many times an it may still not collect! keep trying, or use a different
+            collection method! Note\n
+            \ta. Circle : collects everything that has center within it.\n
+            \tb. Rectangle : Has a chance to collect if center within borders,
+               but the larger the rectangle area the lower the chance to collect object is, starting at 50%.\n
+            \tNote Rectangle must be draw from the upper left corner to bottom right Note\n
+            \tc. Line : Has a 70% chance of popping balloon if line passes close to center\n
+            \tNote Line has a buffer so you do not be directly on it extends out perpendicular to the line
+                with a radius at the end!  Note\n
+        5. Game is over when the number of rounds have been reached, or their is no balloons left on screen\n
+        6. Start over!
+    </string>
 </resources>
