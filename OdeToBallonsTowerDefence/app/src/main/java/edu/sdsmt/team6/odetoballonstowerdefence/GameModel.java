@@ -41,9 +41,9 @@ public class GameModel {
         if(!initialized){
             Random rand = new Random();
             for (int i = 0; i < numBalloons; i++) {
-                //arbitrarily adding a 10 pixel padding around the screen
-                int locX = rand.nextInt(screenWidth-20) + 10;
-                int locY = rand.nextInt(screenHeight-20) + 10;
+                //arbitrarily adding a 20 pixel padding around the screen
+                int locX = rand.nextInt(screenWidth-40) + 20;
+                int locY = rand.nextInt(screenHeight-40) + 20;
 
                 balloons.add(new Balloon(locX, locY));
             }

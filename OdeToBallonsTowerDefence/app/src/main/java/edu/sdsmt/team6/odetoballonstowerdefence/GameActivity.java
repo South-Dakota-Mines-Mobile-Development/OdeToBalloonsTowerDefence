@@ -9,9 +9,11 @@ import android.util.DisplayMetrics;
 import android.view.View;
 import android.widget.TextView;
 
+import java.io.Serializable;
 import java.util.Objects;
 
 import edu.sdsmt.team6.odetoballonstowerdefence.ModelDataTypes.CollectionArea;
+import edu.sdsmt.team6.odetoballonstowerdefence.ModelDataTypes.PlayerModel;
 
 public class GameActivity extends AppCompatActivity {
     private GameViewModel viewModel;
@@ -68,6 +70,19 @@ public class GameActivity extends AppCompatActivity {
 
         viewModel.getIsGameOver().observe(this, isGameOver ->{
             //Handle the game end screen
+            if (isGameOver == true) {
+                Intent gameOver = new Intent(this, EndGameActivity.class);
+                PlayerModel p1 = viewModel.getPlayerOne().getValue();
+                PlayerModel p2 =  viewModel.getPlayerTwo().getValue();
+                int currentRoundNumber = viewModel.getCurrentRoundNumber().getValue();
+                gameOver.putExtra("edu.sdsmt.bloons.rounds", currentRoundNumber);
+                gameOver.putExtra("edu.sdsmt.bloons.p1Score", p1.getScore());
+                gameOver.putExtra("edu.sdsmt.bloons.p2Score", p2.getScore());
+                gameOver.putExtra("edu.sdsmt.bloons.p1Name", p1.getName());
+                gameOver.putExtra("edu.sdsmt.bloons.p2Name", p2.getName());
+
+                startActivity(gameOver);
+            }
         });
 
         viewModel.getCurrentPlayerTurn().observe(this, playerTurn ->{
@@ -97,7 +112,9 @@ public class GameActivity extends AppCompatActivity {
         Intent intent = getIntent();
         String playerOneName = intent.getStringExtra("edu.sdsmt.bloons.PlayerOneName");
         String playerTwoName = intent.getStringExtra("edu.sdsmt.bloons.PlayerTwoName");
+        Integer roundCount = intent.getIntExtra("edu.sdsmt.bloons.roundNumber", -1);
         viewModel.setNumBalloons(25);
+        viewModel.setNumOfRounds(roundCount);
         viewModel.setPlayerNames(playerOneName, playerTwoName);
         ((TextView)findViewById(R.id.player1Label))
                 .setText(R.string.player1LabelActive);
