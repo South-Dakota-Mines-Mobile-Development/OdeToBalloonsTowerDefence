@@ -42,4 +42,9 @@
         5. Game is over when the number of rounds have been reached, or their is no balloons left on screen\n
         6. Start over!
     </string>
+    <string name="game_over">Game Over!</string>
+    <string name="FinalScoreP2">0</string>
+    <string name="p2_name">P2 Name</string>
+    <string name="finalScoreP1">0</string>
+    <string name="p1_name">P1 Name</string>
 </resources>
