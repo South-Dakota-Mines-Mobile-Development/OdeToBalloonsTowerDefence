@@ -10,18 +10,16 @@ import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import java.util.Objects;
+
 public class MainActivity extends AppCompatActivity {
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) throws NullPointerException {
         super.onCreate(savedInstanceState);
 
         //Disables the top action bar
-        try
-        {
-            this.getSupportActionBar().hide();
-        }
-        catch (NullPointerException e){}
+        Objects.requireNonNull(this.getSupportActionBar()).hide();
 
         MediaPlayer mediaPlayer= MediaPlayer.create(MainActivity.this,R.raw.maintheme);
 
@@ -31,17 +29,17 @@ public class MainActivity extends AppCompatActivity {
 
         Spinner numberDropdown = findViewById(R.id.numberSpinner);
         Integer[] numbers = new Integer[]{3, 5, 10};
-        ArrayAdapter<Integer> adapter = new ArrayAdapter<Integer>(this,android.R.layout.simple_spinner_dropdown_item, numbers);
+        ArrayAdapter<Integer> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, numbers);
         numberDropdown.setAdapter(adapter);
     }
 
     public void onGameStart(View view) {
         Intent intent = new Intent(this, GameActivity.class);
 
-        TextView firstNameInput = (TextView)findViewById(R.id.playerOneTextbox);
+        TextView firstNameInput = findViewById(R.id.playerOneTextbox);
         String playerOne = firstNameInput.getText().toString();
 
-        TextView secondNameInput = (TextView)findViewById(R.id.playerTwoTextbox);
+        TextView secondNameInput = findViewById(R.id.playerTwoTextbox);
         String playerTwo = secondNameInput.getText().toString();
 
         Spinner numberDropdown = findViewById(R.id.numberSpinner);

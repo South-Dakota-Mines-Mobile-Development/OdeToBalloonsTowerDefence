@@ -32,13 +32,15 @@ public class EndGameActivity extends AppCompatActivity {
         String p1Name = gameOver.getStringExtra("edu.sdsmt.bloons.p1Name");
         String p2Name = gameOver.getStringExtra("edu.sdsmt.bloons.p2Name");
 
-        TextView roundCountText = (TextView)findViewById(R.id.finalRoundCnt);
-        TextView p1NameText = (TextView)findViewById(R.id.player1NameF);
-        TextView p2NameText = (TextView)findViewById(R.id.player2NameF);
-        TextView p2ScoreText = (TextView)findViewById(R.id.player2ScoreF);
-        TextView p1ScoreText = (TextView)findViewById(R.id.player1ScoreF);
+        TextView roundCountText = findViewById(R.id.finalRoundCnt);
+        TextView p1NameText = findViewById(R.id.player1NameF);
+        TextView p2NameText = findViewById(R.id.player2NameF);
+        TextView p1ScoreText = findViewById(R.id.player1ScoreF);
+        TextView p2ScoreText = findViewById(R.id.player2ScoreF);
 
-        roundCountText.setText("Rounds: " + String.valueOf(roundCount));
+
+        String roundLabel = "Rounds: " + roundCount;
+        roundCountText.setText(roundLabel);
         p1NameText.setText(p1Name);
         p2NameText.setText(p2Name);
         p1ScoreText.setText(String.valueOf(p1Score));

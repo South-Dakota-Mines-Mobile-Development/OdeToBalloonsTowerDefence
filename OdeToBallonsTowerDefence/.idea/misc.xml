@@ -3,15 +3,13 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/Dalton_WorkSchool/Code/SDSMT/Mobile/OdeToBalloonsTowerDefence/OdeToBallonsTowerDefence/app/src/main/res/layout/activity_game.xml" value="0.36666666666666664" />
-        <entry key="..\:/Source/Classes/CSC476/OdeToBalloonsTowerDefence/OdeToBallonsTowerDefence/app/src/main/res/layout-land/activity_game.xml" value="0.9" />
-        <entry key="..\:/Source/Classes/CSC476/OdeToBalloonsTowerDefence/OdeToBallonsTowerDefence/app/src/main/res/layout-land/activity_main.xml" value="0.651685393258427" />
-        <entry key="..\:/Source/Classes/CSC476/OdeToBalloonsTowerDefence/OdeToBallonsTowerDefence/app/src/main/res/layout-land/activity_selection.xml" value="0.651685393258427" />
-        <entry key="..\:/Source/Classes/CSC476/OdeToBalloonsTowerDefence/OdeToBallonsTowerDefence/app/src/main/res/layout/activity_end_game.xml" value="0.7366071428571429" />
-        <entry key="..\:/Source/Classes/CSC476/OdeToBalloonsTowerDefence/OdeToBallonsTowerDefence/app/src/main/res/layout/activity_game.xml" value="0.3625" />
-        <entry key="..\:/Source/Classes/CSC476/OdeToBalloonsTowerDefence/OdeToBallonsTowerDefence/app/src/main/res/layout/activity_how_to.xml" value="0.8402777777777778" />
-        <entry key="..\:/Source/Classes/CSC476/OdeToBalloonsTowerDefence/OdeToBallonsTowerDefence/app/src/main/res/layout/activity_main.xml" value="0.87" />
-        <entry key="..\:/Source/Classes/CSC476/OdeToBalloonsTowerDefence/OdeToBallonsTowerDefence/app/src/main/res/layout/activity_selection.xml" value="0.8402777777777778" />
+        <entry key="..\:/Dalton_WorkSchool/Code/SDSMT/Mobile/OdeToBalloonsTowerDefence/OdeToBallonsTowerDefence/app/src/main/res/layout-land/activity_game.xml" value="0.18" />
+        <entry key="..\:/Dalton_WorkSchool/Code/SDSMT/Mobile/OdeToBalloonsTowerDefence/OdeToBallonsTowerDefence/app/src/main/res/layout-land/activity_main.xml" value="0.17989417989417988" />
+        <entry key="..\:/Dalton_WorkSchool/Code/SDSMT/Mobile/OdeToBalloonsTowerDefence/OdeToBallonsTowerDefence/app/src/main/res/layout-land/activity_selection.xml" value="0.15123456790123457" />
+        <entry key="..\:/Dalton_WorkSchool/Code/SDSMT/Mobile/OdeToBalloonsTowerDefence/OdeToBallonsTowerDefence/app/src/main/res/layout/activity_end_game.xml" value="0.21240942028985507" />
+        <entry key="..\:/Dalton_WorkSchool/Code/SDSMT/Mobile/OdeToBalloonsTowerDefence/OdeToBallonsTowerDefence/app/src/main/res/layout/activity_game.xml" value="0.33" />
+        <entry key="..\:/Dalton_WorkSchool/Code/SDSMT/Mobile/OdeToBalloonsTowerDefence/OdeToBallonsTowerDefence/app/src/main/res/layout/activity_main.xml" value="0.17255434782608695" />
+        <entry key="..\:/Dalton_WorkSchool/Code/SDSMT/Mobile/OdeToBalloonsTowerDefence/OdeToBallonsTowerDefence/app/src/main/res/layout/activity_selection.xml" value="0.17864583333333334" />
         <entry key="..\:/Users/JacobWest/AndroidStudioProjects/OdeToBallonsTowerDefence/app/src/main/res/layout/activity_main.xml" value="0.335" />
         <entry key="..\:/Users/JacobWest/source/classes/OdeToBalloonsTowerDefence/OdeToBallonsTowerDefence/app/src/main/res/drawable/ic_launcher_foreground.xml" value="0.33240740740740743" />
         <entry key="..\:/Users/JacobWest/source/classes/OdeToBalloonsTowerDefence/OdeToBallonsTowerDefence/app/src/main/res/layout/activity_game.xml" value="0.5" />

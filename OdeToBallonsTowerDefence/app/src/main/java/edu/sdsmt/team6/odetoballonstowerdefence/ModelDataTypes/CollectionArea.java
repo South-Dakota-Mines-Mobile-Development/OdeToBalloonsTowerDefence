@@ -9,8 +9,8 @@ public abstract class CollectionArea {
     private final int yLocation;
     protected int width;
     protected int height;
-    protected int screenWidth;
-    protected int screenHeight;
+    protected final int screenWidth;
+    protected final int screenHeight;
 
     public CollectionArea(int xLocation, int yLocation, int screenWidth, int screenHeight) {
         this.xLocation = xLocation;

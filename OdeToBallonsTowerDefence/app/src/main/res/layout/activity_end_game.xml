@@ -59,11 +59,11 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/player2NameF"
+                android:id="@+id/player1NameF"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="32dp"
-                android:text="@string/p2_name"
+                android:text="@string/p1_name"
                 android:textAlignment="center"
                 android:textSize="48sp" />
 
@@ -77,11 +77,11 @@
                 android:textSize="48sp" />
 
             <TextView
-                android:id="@+id/player1NameF"
+                android:id="@+id/player2NameF"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:text="@string/p1_name"
+                android:text="@string/p2_name"
                 android:textAlignment="center"
                 android:textSize="48sp" />
 
