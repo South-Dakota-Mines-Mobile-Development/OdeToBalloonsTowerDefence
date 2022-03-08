@@ -23,8 +23,9 @@ public class HowToActivity extends AppCompatActivity {
     }
 
     public void backToStart(View view) {
-        Intent intent = new Intent(this, MainActivity.class);
+        Intent intent = new Intent();
 
-        startActivity(intent);
+        setResult(RESULT_OK);
+        finish();
     }
 }

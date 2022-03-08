@@ -77,13 +77,25 @@ public class GameActivity extends AppCompatActivity {
         viewModel.setPlayerNames(playerOneName, playerTwoName);
 
         //Need to replace with activity switcher
-        viewModel.onChangeCollectionAreaType(CollectionArea.CIRCLE);
+//        viewModel.onChangeCollectionAreaType(CollectionArea.CIRCLE);
 
     }
 
     public void selectionModeActivity(View view) {
         Intent intent = new Intent(this, SelectionActivity.class);
 
-        startActivity(intent);
+        startActivityForResult(intent, 1);
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if(requestCode == 1) {
+            if(resultCode == RESULT_OK) {
+                int selectionMode = data.getIntExtra("selectionMethod", -1);
+                viewModel.onChangeCollectionAreaType(selectionMode);
+            }
+        }
     }
 }
