@@ -21,8 +21,13 @@ public class MainActivity extends AppCompatActivity {
         }
         catch (NullPointerException e){}
 
-        MediaPlayer mainTheme= MediaPlayer.create(MainActivity.this,R.raw.maintheme);
-        mainTheme.start();
+        MediaPlayer mediaPlayer= MediaPlayer.create(MainActivity.this,R.raw.maintheme);
+
+//        if(mediaPlayer.isPlaying()) {
+//            mediaPlayer.stop();
+//        }
+
+        mediaPlayer.start();
 
         setContentView(R.layout.activity_main);
 

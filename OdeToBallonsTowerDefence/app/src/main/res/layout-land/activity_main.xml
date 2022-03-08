@@ -10,21 +10,21 @@
 
     <ImageView
         android:id="@+id/introLogo"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
         android:contentDescription="@string/app_name"
         android:padding="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/linearLayout2"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/linearLayout2"
+        app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/otbtd_logo"
         tools:srcCompat="@drawable/otbtd_logo" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/linearLayout2"
         android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/introLogo"
@@ -44,19 +44,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <ImageButton
-            android:id="@+id/startButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="#00FFFFFF"
-            android:contentDescription="@string/startButton"
-            android:onClick="onGameStart"
-            android:src="@drawable/startbloon"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/playerTwoTextbox" />
-
         <EditText
             android:id="@+id/playerTwoTextbox"
             android:layout_width="wrap_content"
@@ -66,10 +53,44 @@
             android:minHeight="48dp"
             android:text="@string/playerTwoTextbox"
             android:textAlignment="center"
-            app:layout_constraintBottom_toTopOf="@+id/startButton"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/playerOneTextbox" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="189dp"
+            android:layout_weight="1"
+            app:layout_constraintTop_toBottomOf="@+id/playerTwoTextbox">
+
+            <Button
+                android:id="@+id/howToPlayActivityBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:backgroundTint="#D51616"
+                android:fontFamily="@font/luckiest_guy"
+                android:onClick="howToActivity"
+                android:text="@string/howToPlayActivityBtn"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/startButton" />
+
+            <ImageButton
+                android:id="@+id/startButton"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="#00FFFFFF"
+                android:contentDescription="@string/startButton"
+                android:onClick="onGameStart"
+                android:src="@drawable/startbloon"
+                app:layout_constraintBottom_toTopOf="@+id/howToPlayActivityBtn"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
