@@ -66,6 +66,30 @@ public class GameActivity extends AppCompatActivity {
             findViewById(R.id.makeMoveButton).setEnabled(canMakeMove);
         });
 
+        viewModel.getIsGameOver().observe(this, isGameOver ->{
+            //Handle the game end screen
+        });
+
+        viewModel.getCurrentPlayerTurn().observe(this, playerTurn ->{
+            switch(playerTurn){
+                case PLAYER_ONE:
+                    ((TextView)findViewById(R.id.player1Label))
+                            .setText(R.string.player1LabelActive);
+                    ((TextView)findViewById(R.id.player2Label)).setText(R.string.player2Label);
+                    break;
+                case PLAYER_TWO:
+                    ((TextView)findViewById(R.id.player2Label))
+                            .setText(R.string.player2LabelActive);
+                    ((TextView)findViewById(R.id.player1Label)).setText(R.string.player1Label);
+                    break;
+            }
+        });
+
+        viewModel.getCurrentRoundNumber().observe(this, roundNumber ->{
+            ((TextView)findViewById(R.id.roundCounter))
+                    .setText(String.valueOf(roundNumber));
+        });
+
         findViewById(R.id.makeMoveButton)
                 .setOnClickListener(v -> viewModel.onMakeMove());
 
@@ -75,12 +99,14 @@ public class GameActivity extends AppCompatActivity {
         String playerTwoName = intent.getStringExtra("edu.sdsmt.bloons.PlayerTwoName");
         viewModel.setNumBalloons(25);
         viewModel.setPlayerNames(playerOneName, playerTwoName);
+        ((TextView)findViewById(R.id.player1Label))
+                .setText(R.string.player1LabelActive);
+
 
     }
 
     public void selectionModeActivity(View view) {
         Intent intent = new Intent(this, SelectionActivity.class);
-
         startActivityForResult(intent, 1);
     }
 

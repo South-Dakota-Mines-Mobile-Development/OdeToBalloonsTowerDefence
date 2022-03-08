@@ -110,16 +110,20 @@ public class GameView extends View {
             return;
 
         if(collectionArea instanceof CollectionRectangle){
+            int left = Math.min(collectionArea.getX(),
+                    collectionArea.getX() + collectionArea.getWidth());
+            int right = Math.max(collectionArea.getX(),
+                            collectionArea.getX() + collectionArea.getWidth());
+            int top = Math.min(collectionArea.getY(),
+                    collectionArea.getY() + collectionArea.getHeight());
+            int bottom = Math.max(collectionArea.getY(),
+                    collectionArea.getY() + collectionArea.getHeight());
+
             Paint myPaint = new Paint();
             myPaint.setColor(Color.rgb(255, 0, 0));
             myPaint.setStrokeWidth(10);
             myPaint.setStyle(Paint.Style.STROKE);
-            canvas.drawRect(
-                    collectionArea.getX(),
-                    collectionArea.getY(),
-                    collectionArea.getX() + collectionArea.getWidth(),
-                    collectionArea.getY() + collectionArea.getHeight(),
-                    myPaint);
+            canvas.drawRect(left, top, right, bottom, myPaint);
         }
         else if(collectionArea instanceof CollectionCircle){
             Paint myPaint = new Paint();

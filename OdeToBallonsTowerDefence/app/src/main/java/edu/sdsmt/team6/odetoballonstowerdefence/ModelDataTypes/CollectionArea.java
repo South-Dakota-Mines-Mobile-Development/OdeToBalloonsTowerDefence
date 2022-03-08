@@ -5,8 +5,8 @@ public abstract class CollectionArea {
     public static final int CIRCLE = 1;
     public static final int LINE = 2;
 
-    private int xLocation;
-    private int yLocation;
+    private final int xLocation;
+    private final int yLocation;
     protected int width;
     protected int height;
     protected int screenWidth;
