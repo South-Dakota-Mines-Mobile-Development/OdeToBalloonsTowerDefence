@@ -29,6 +29,26 @@
         app:layout_constraintStart_toStartOf="parent">
 
         <TextView
+            android:id="@+id/roundLabel3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/roundLabel"
+            android:textColor="#3E2723"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/roundCounter"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/roundCounterInitialValue"
+            android:textColor="#3E2723"
+            app:layout_constraintEnd_toEndOf="@+id/roundLabel3"
+            app:layout_constraintStart_toStartOf="@+id/roundLabel3"
+            app:layout_constraintTop_toBottomOf="@+id/roundLabel3" />
+
+        <TextView
             android:id="@+id/player2Label"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
