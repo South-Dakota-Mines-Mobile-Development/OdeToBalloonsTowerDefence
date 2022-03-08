@@ -9,10 +9,8 @@ import android.util.DisplayMetrics;
 import android.view.View;
 import android.widget.TextView;
 
-import java.io.Serializable;
 import java.util.Objects;
 
-import edu.sdsmt.team6.odetoballonstowerdefence.ModelDataTypes.CollectionArea;
 import edu.sdsmt.team6.odetoballonstowerdefence.ModelDataTypes.PlayerModel;
 
 public class GameActivity extends AppCompatActivity {
@@ -44,9 +42,8 @@ public class GameActivity extends AppCompatActivity {
 
 
         findViewById(R.id.gameView).addOnLayoutChangeListener(
-                (v, left, top, right, bottom, lastLeft, lastTop, lastRight, lastBottom) -> {
-                    viewModel.onGameSizeChanged(v.getWidth(), v.getHeight());
-        });
+                (v, left, top, right, bottom, lastLeft, lastTop, lastRight, lastBottom) ->
+                        viewModel.onGameSizeChanged(v.getWidth(), v.getHeight()));
 
         viewModel.getPlayerOne().observe(this, playerOne -> {
             ((TextView)findViewById(R.id.player1Name)).setText(playerOne.getName());
@@ -58,25 +55,25 @@ public class GameActivity extends AppCompatActivity {
             ((TextView)findViewById(R.id.player2Score)).setText(String.valueOf(playerTwo.getScore()));
         });
 
-        viewModel.getCollectionArea().observe(this, collectionArea -> {
-            gameView.setCollectionArea(collectionArea);
-        });
+        viewModel.getCollectionArea().observe(this, collectionArea ->
+                gameView.setCollectionArea(collectionArea));
 
         viewModel.getBalloons().observe(this, bloons -> gameView.setBloons(bloons));
 
-        viewModel.getCanMakeMove().observe(this, canMakeMove ->{
-            findViewById(R.id.makeMoveButton).setEnabled(canMakeMove);
-        });
+        viewModel.getCanMakeMove().observe(this, canMakeMove ->
+                findViewById(R.id.makeMoveButton).setEnabled(canMakeMove));
 
         viewModel.getIsGameOver().observe(this, isGameOver ->{
             //Handle the game end screen
-            if (isGameOver == true) {
+            if (isGameOver) {
                 Intent gameOver = new Intent(this, EndGameActivity.class);
                 PlayerModel p1 = viewModel.getPlayerOne().getValue();
                 PlayerModel p2 =  viewModel.getPlayerTwo().getValue();
                 int currentRoundNumber = viewModel.getCurrentRoundNumber().getValue();
                 gameOver.putExtra("edu.sdsmt.bloons.rounds", currentRoundNumber);
+                assert p1 != null;
                 gameOver.putExtra("edu.sdsmt.bloons.p1Score", p1.getScore());
+                assert p2 != null;
                 gameOver.putExtra("edu.sdsmt.bloons.p2Score", p2.getScore());
                 gameOver.putExtra("edu.sdsmt.bloons.p1Name", p1.getName());
                 gameOver.putExtra("edu.sdsmt.bloons.p2Name", p2.getName());
@@ -100,10 +97,9 @@ public class GameActivity extends AppCompatActivity {
             }
         });
 
-        viewModel.getCurrentRoundNumber().observe(this, roundNumber ->{
-            ((TextView)findViewById(R.id.roundCounter))
-                    .setText(String.valueOf(roundNumber));
-        });
+        viewModel.getCurrentRoundNumber().observe(this, roundNumber ->
+                ((TextView)findViewById(R.id.roundCounter))
+                    .setText(String.valueOf(roundNumber)));
 
         findViewById(R.id.makeMoveButton)
                 .setOnClickListener(v -> viewModel.onMakeMove());
@@ -112,7 +108,7 @@ public class GameActivity extends AppCompatActivity {
         Intent intent = getIntent();
         String playerOneName = intent.getStringExtra("edu.sdsmt.bloons.PlayerOneName");
         String playerTwoName = intent.getStringExtra("edu.sdsmt.bloons.PlayerTwoName");
-        Integer roundCount = intent.getIntExtra("edu.sdsmt.bloons.roundNumber", -1);
+        int roundCount = intent.getIntExtra("edu.sdsmt.bloons.roundNumber", -1);
         viewModel.setNumBalloons(25);
         viewModel.setNumOfRounds(roundCount);
         viewModel.setPlayerNames(playerOneName, playerTwoName);

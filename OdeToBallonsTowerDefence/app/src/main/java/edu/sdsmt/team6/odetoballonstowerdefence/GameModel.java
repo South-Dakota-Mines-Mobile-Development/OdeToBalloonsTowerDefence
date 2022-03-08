@@ -14,11 +14,11 @@ public class GameModel {
 
     public enum PlayerTurn {PLAYER_ONE, PLAYER_TWO}
 
-    private ArrayList<Balloon> balloons = new ArrayList<>();
+    private final ArrayList<Balloon> balloons = new ArrayList<>();
     private CollectionArea collectionArea = null;
     private PlayerTurn playerTurn = PlayerTurn.PLAYER_ONE;
-    private PlayerModel playerOne= new PlayerModel("player1");
-    private PlayerModel playerTwo = new PlayerModel("player2");
+    private final PlayerModel playerOne= new PlayerModel("player1");
+    private final PlayerModel playerTwo = new PlayerModel("player2");
     private int roundNumber = 0;
     private int roundsToEnd;
     private int collectionAreaType = CollectionArea.RECTANGLE; //default is rectangle

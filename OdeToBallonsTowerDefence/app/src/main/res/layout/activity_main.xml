@@ -29,17 +29,20 @@
             android:layout_marginStart="32dp"
             android:layout_marginEnd="32dp"
             android:layout_weight="1"
+            android:autofillHints="Player One"
             android:ems="10"
+            android:hint="@string/player_one_s_name"
             android:inputType="textPersonName"
             android:minHeight="48dp"
             android:text="@string/playerOneTextbox"
             android:textAlignment="center"
+            android:textColor="#33691E"
             app:layout_constraintBottom_toTopOf="@+id/playerTwoTextbox"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            android:autofillHints="Player One" />
+            tools:ignore="TextContrastCheck" />
 
         <EditText
             android:id="@+id/playerTwoTextbox"
@@ -48,17 +51,20 @@
             android:layout_marginStart="32dp"
             android:layout_marginEnd="32dp"
             android:layout_weight="1"
+            android:autofillHints="Player Two"
             android:ems="10"
+            android:hint="@string/player_two_s_name"
             android:inputType="textPersonName"
             android:minHeight="48dp"
             android:text="@string/playerTwoTextbox"
             android:textAlignment="center"
+            android:textColor="#33691E"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/playerOneTextbox"
-            android:autofillHints="Player Two" />
+            tools:ignore="TextContrastCheck" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -75,10 +81,12 @@
             android:fontFamily="@font/luckiest_guy"
             android:onClick="howToActivity"
             android:text="@string/howToPlayActivityBtn"
+            android:textColor="#FFF176"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/startButton" />
+            app:layout_constraintTop_toBottomOf="@+id/startButton"
+            tools:ignore="TextContrastCheck" />
 
         <ImageButton
             android:id="@+id/startButton"
@@ -99,6 +107,7 @@
             android:id="@+id/numberSpinner"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:contentDescription="@string/RoundPickerSpeakableText"
             android:minHeight="48dp"
             app:layout_constraintBottom_toBottomOf="@+id/startButton"
             app:layout_constraintEnd_toEndOf="parent"
@@ -111,6 +120,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/rounds"
+            android:textColor="#33691E"
             app:layout_constraintBottom_toTopOf="@+id/numberSpinner"
             app:layout_constraintEnd_toEndOf="@+id/numberSpinner"
             app:layout_constraintStart_toStartOf="@+id/numberSpinner" />
