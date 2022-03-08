@@ -48,4 +48,5 @@
     <string name="finalScoreP1">0</string>
     <string name="p1_name">P1 Name</string>
     <string name="rounds_5">Rounds: 5</string>
+    <string name="rounds">Rounds</string>
 </resources>

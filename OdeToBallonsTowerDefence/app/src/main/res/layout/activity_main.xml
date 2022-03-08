@@ -82,7 +82,7 @@
 
         <ImageButton
             android:id="@+id/startButton"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:background="#00FFFFFF"
@@ -90,9 +90,31 @@
             android:onClick="onGameStart"
             android:src="@drawable/startbloon"
             app:layout_constraintBottom_toTopOf="@+id/howToPlayActivityBtn"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/numberSpinner"
+            app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+
+        <Spinner
+            android:id="@+id/numberSpinner"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:minHeight="48dp"
+            app:layout_constraintBottom_toBottomOf="@+id/startButton"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/startButton"
+            app:layout_constraintTop_toTopOf="@+id/startButton" />
+
+        <TextView
+            android:id="@+id/textView4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/rounds"
+            app:layout_constraintBottom_toTopOf="@+id/numberSpinner"
+            app:layout_constraintEnd_toEndOf="@+id/numberSpinner"
+            app:layout_constraintStart_toStartOf="@+id/numberSpinner" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </LinearLayout>

@@ -112,8 +112,9 @@ public class GameActivity extends AppCompatActivity {
         Intent intent = getIntent();
         String playerOneName = intent.getStringExtra("edu.sdsmt.bloons.PlayerOneName");
         String playerTwoName = intent.getStringExtra("edu.sdsmt.bloons.PlayerTwoName");
+        Integer roundCount = intent.getIntExtra("edu.sdsmt.bloons.roundNumber", -1);
         viewModel.setNumBalloons(25);
-        viewModel.setNumOfRounds(4);
+        viewModel.setNumOfRounds(roundCount);
         viewModel.setPlayerNames(playerOneName, playerTwoName);
         ((TextView)findViewById(R.id.player1Label))
                 .setText(R.string.player1LabelActive);
