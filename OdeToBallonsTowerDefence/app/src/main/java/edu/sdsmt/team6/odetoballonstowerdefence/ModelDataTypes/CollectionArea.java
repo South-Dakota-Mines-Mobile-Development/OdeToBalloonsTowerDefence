@@ -37,5 +37,9 @@ public abstract class CollectionArea {
         return height;
     }
 
+    public double distanceFormula(double x1, double y1, double x2, double y2){
+        return Math.sqrt( (x2 - x1)*(x2 - x1) + (y2 - y1)*(y2 - y1));
+    }
+
     public abstract void checkBalloon(Balloon balloon);
 }

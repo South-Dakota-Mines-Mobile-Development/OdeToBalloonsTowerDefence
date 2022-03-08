@@ -76,9 +76,6 @@ public class GameActivity extends AppCompatActivity {
         viewModel.setNumBalloons(25);
         viewModel.setPlayerNames(playerOneName, playerTwoName);
 
-        //Need to replace with activity switcher
-//        viewModel.onChangeCollectionAreaType(CollectionArea.CIRCLE);
-
     }
 
     public void selectionModeActivity(View view) {

@@ -24,6 +24,7 @@ public class GameModel {
     private int collectionAreaType = CollectionArea.RECTANGLE; //default is rectangle
     private int screenWidth;
     private int screenHeight;
+    private Boolean initialized = false;
 
     public void setScreenSize(int screenWidth, int screenHeight){//may need to move balloons location?
         this.screenWidth = screenWidth;
@@ -37,15 +38,21 @@ public class GameModel {
     }
 
     public void setNumBalloons(int numBalloons){//may want to clear old balloons?
-        Random rand = new Random();
+        if(!initialized){
+            Random rand = new Random();
+            for (int i = 0; i < numBalloons; i++) {
+                //arbitrarily adding a 10 pixel padding around the screen
+                int locX = rand.nextInt(screenWidth-20) + 10;
+                int locY = rand.nextInt(screenHeight-20) + 10;
 
-        for (int i = 0; i < numBalloons; i++) {
-            //arbitrarily adding a 10 pixel padding around the screen
-            int locX = rand.nextInt(screenWidth-20) + 10;
-            int locY = rand.nextInt(screenHeight-20) + 10;
-
-            balloons.add(new Balloon(locX, locY));
+                balloons.add(new Balloon(locX, locY));
+            }
+            initialized = true;
         }
+    }
+
+    public PlayerTurn getPlayerTurn(){
+        return playerTurn;
     }
 
     public void updateTurn(){
@@ -126,12 +133,10 @@ public class GameModel {
     }
 
     private void checkBalloons(){
-        for (Balloon balloon: balloons) {
-            if(!balloon.isPopped()){
-                collectionArea.checkBalloon(balloon);
-                if(balloon.isPopped()){
-                    addToPlayersList(balloon);
-                }
+        for (Balloon balloon: getBalloons()) {
+            collectionArea.checkBalloon(balloon);
+            if(balloon.isPopped()){
+                addToPlayersList(balloon);
             }
         }
     }
@@ -150,6 +155,6 @@ public class GameModel {
     }
 
     public boolean gameIsOver(){
-        return roundsToEnd == roundNumber;
+        return roundsToEnd == roundNumber || getBalloons().size() == 0;
     }
 }
