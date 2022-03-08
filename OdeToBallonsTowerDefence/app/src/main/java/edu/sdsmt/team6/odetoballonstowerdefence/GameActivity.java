@@ -4,19 +4,14 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
 
 import android.content.Intent;
-import android.graphics.Color;
-import android.graphics.Paint;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
-import android.util.Log;
+import android.view.View;
 import android.widget.TextView;
 
 import java.util.Objects;
 
 import edu.sdsmt.team6.odetoballonstowerdefence.ModelDataTypes.CollectionArea;
-import edu.sdsmt.team6.odetoballonstowerdefence.ModelDataTypes.CollectionCircle;
-import edu.sdsmt.team6.odetoballonstowerdefence.ModelDataTypes.CollectionLine;
-import edu.sdsmt.team6.odetoballonstowerdefence.ModelDataTypes.CollectionRectangle;
 
 public class GameActivity extends AppCompatActivity {
     private GameViewModel viewModel;
@@ -69,7 +64,6 @@ public class GameActivity extends AppCompatActivity {
 
         viewModel.getCanMakeMove().observe(this, canMakeMove ->{
             findViewById(R.id.makeMoveButton).setEnabled(canMakeMove);
-            findViewById(R.id.resetMove).setEnabled(canMakeMove);
         });
 
         viewModel.getIsGameOver().observe(this, isGameOver ->{
@@ -99,21 +93,32 @@ public class GameActivity extends AppCompatActivity {
         findViewById(R.id.makeMoveButton)
                 .setOnClickListener(v -> viewModel.onMakeMove());
 
-        findViewById(R.id.resetMove)
-                .setOnClickListener(v -> viewModel.onResetCollectionArea());
-
 
         Intent intent = getIntent();
         String playerOneName = intent.getStringExtra("edu.sdsmt.bloons.PlayerOneName");
         String playerTwoName = intent.getStringExtra("edu.sdsmt.bloons.PlayerTwoName");
-        viewModel.setNumBalloons(5);
+        viewModel.setNumBalloons(25);
         viewModel.setPlayerNames(playerOneName, playerTwoName);
         ((TextView)findViewById(R.id.player1Label))
                 .setText(R.string.player1LabelActive);
 
-        //Need to replace with activity switcher
-        viewModel.onChangeCollectionAreaType(CollectionArea.RECTANGLE);
-        viewModel.setNumOfRounds(5);
 
+    }
+
+    public void selectionModeActivity(View view) {
+        Intent intent = new Intent(this, SelectionActivity.class);
+        startActivityForResult(intent, 1);
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if(requestCode == 1) {
+            if(resultCode == RESULT_OK) {
+                int selectionMode = data.getIntExtra("selectionMethod", -1);
+                viewModel.onChangeCollectionAreaType(selectionMode);
+            }
+        }
     }
 }
