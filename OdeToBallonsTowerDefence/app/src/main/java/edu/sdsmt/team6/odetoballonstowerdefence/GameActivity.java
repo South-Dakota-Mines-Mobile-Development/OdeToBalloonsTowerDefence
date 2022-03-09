@@ -135,3 +135,60 @@ public class GameActivity extends AppCompatActivity {
         }
     }
 }
+
+/* Project 1 Grading
+ *
+ * We chose to be graded as a group for this project
+ *
+ *
+ * Group:
+ *      ✓____ 6pt No redundant activities
+ *      ✓____ 6pt How to play dialog
+ *      ✓____ 6pt Icons
+ *      ✓____ 6pt End activity
+ *      ✓____ 6pt Back button handled
+ * How to open the "how to play dialog":
+ *      - Click the "How to play" button on the start screen
+ *
+ * Individual:
+ *
+ * 	Play activity and custom view
+ *
+ * 		✓____ 9pt Activity appearance
+ * 		✓____ 16pt Static Custom View
+ * 		✓____ 20pt Dynamic part of the Custom View
+ * 		✓____ 15pt Rotation
+ *
+ * 	Welcome activity and Game Class
+ *
+ * 		✓____ 13pt Welcome activity appearance
+ * 		✓____ 20pt Applying capture rules
+ * 		✓____ 12pt Game state
+ * 		✓____ 15pt Rotation
+ * 		What is the probability of the rectangle capture:
+ *          - If the rectangle is <30% of the screen 50%
+ *          - If the rectangle is <50% of the screen 40%
+ *          - If the rectangle is <70% of the screen 30%
+ *          - If the rectangle is <85% of the screen 20%
+ *          - If the rectangle is >85% of the screen 1%
+ *
+ * 	Capture activity and activity sequencing
+ *
+ * 		✓____ 9pt Capture activity appearance
+ * 		✓____ 16pt Player round sequencing
+ * 		✓____ 20pt Move to next activity
+ * 		✓____ 15pt Rotation
+ *
+ * 	Timer
+ *
+ * 		✓____ 9pt Timer activity
+ * 		✓____ 24pt Graphic
+ * 		✓____ 12pt Player turn end
+ * 		✓____ 15pt Rotation
+ *
+ *
+ * Please list any additional rules that may be needed to properly grade
+ * your project:
+ *
+ *
+ */
