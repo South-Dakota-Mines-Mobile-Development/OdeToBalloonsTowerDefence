@@ -1,4 +1,4 @@
-package edu.sdsmt.team6.odetoballonstowerdefence;
+package edu.sdsmt.team4.odetoballonstowerdefence;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
@@ -11,7 +11,7 @@ import android.widget.TextView;
 
 import java.util.Objects;
 
-import edu.sdsmt.team6.odetoballonstowerdefence.ModelDataTypes.PlayerModel;
+import edu.sdsmt.team4.odetoballonstowerdefence.ModelDataTypes.PlayerModel;
 
 public class GameActivity extends AppCompatActivity {
     private GameViewModel viewModel;

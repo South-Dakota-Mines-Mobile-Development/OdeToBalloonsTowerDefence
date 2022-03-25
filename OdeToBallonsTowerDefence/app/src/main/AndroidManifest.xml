@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="edu.sdsmt.team6.odetoballonstowerdefence">
+    package="edu.sdsmt.team4.odetoballonstowerdefence">
 
     <application
         android:allowBackup="true"
@@ -10,19 +10,19 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.OdeToBallonsTowerDefence">
         <activity
-            android:name=".EndGameActivity"
+            android:name="edu.sdsmt.team4.odetoballonstowerdefence.EndGameActivity"
             android:exported="false" />
         <activity
-            android:name=".HowToActivity"
+            android:name="edu.sdsmt.team4.odetoballonstowerdefence.HowToActivity"
             android:exported="false" />
         <activity
-            android:name=".SelectionActivity"
+            android:name="edu.sdsmt.team4.odetoballonstowerdefence.SelectionActivity"
             android:exported="false" />
         <activity
-            android:name=".GameActivity"
+            android:name="edu.sdsmt.team4.odetoballonstowerdefence.GameActivity"
             android:exported="false" />
         <activity
-            android:name=".MainActivity"
+            android:name="edu.sdsmt.team4.odetoballonstowerdefence.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

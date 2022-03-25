@@ -1,11 +1,11 @@
-package edu.sdsmt.team6.odetoballonstowerdefence;
+package edu.sdsmt.team4.odetoballonstowerdefence;
 
 import org.junit.Test;
 
 import static org.junit.Assert.*;
 
-import edu.sdsmt.team6.odetoballonstowerdefence.ModelDataTypes.Balloon;
-import edu.sdsmt.team6.odetoballonstowerdefence.ModelDataTypes.CollectionCircle;
+import edu.sdsmt.team4.odetoballonstowerdefence.ModelDataTypes.Balloon;
+import edu.sdsmt.team4.odetoballonstowerdefence.ModelDataTypes.CollectionCircle;
 
 /**
  * Example local unit test, which will execute on the development machine (host).

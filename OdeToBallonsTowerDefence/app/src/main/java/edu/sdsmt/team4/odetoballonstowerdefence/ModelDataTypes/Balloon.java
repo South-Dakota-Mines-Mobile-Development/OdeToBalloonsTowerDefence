@@ -1,4 +1,4 @@
-package edu.sdsmt.team6.odetoballonstowerdefence.ModelDataTypes;
+package edu.sdsmt.team4.odetoballonstowerdefence.ModelDataTypes;
 
 public class Balloon {
     private final int xLocation;

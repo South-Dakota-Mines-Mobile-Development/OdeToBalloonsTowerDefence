@@ -1,4 +1,4 @@
-package edu.sdsmt.team6.odetoballonstowerdefence;
+package edu.sdsmt.team4.odetoballonstowerdefence;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
@@ -6,9 +6,9 @@ import androidx.lifecycle.ViewModel;
 
 import java.util.ArrayList;
 
-import edu.sdsmt.team6.odetoballonstowerdefence.ModelDataTypes.Balloon;
-import edu.sdsmt.team6.odetoballonstowerdefence.ModelDataTypes.CollectionArea;
-import edu.sdsmt.team6.odetoballonstowerdefence.ModelDataTypes.PlayerModel;
+import edu.sdsmt.team4.odetoballonstowerdefence.ModelDataTypes.Balloon;
+import edu.sdsmt.team4.odetoballonstowerdefence.ModelDataTypes.CollectionArea;
+import edu.sdsmt.team4.odetoballonstowerdefence.ModelDataTypes.PlayerModel;
 
 public class GameViewModel extends ViewModel {
     private final MutableLiveData<CollectionArea> collectionArea = new MutableLiveData<>();

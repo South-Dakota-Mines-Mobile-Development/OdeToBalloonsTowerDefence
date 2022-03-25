@@ -1,14 +1,14 @@
-package edu.sdsmt.team6.odetoballonstowerdefence;
+package edu.sdsmt.team4.odetoballonstowerdefence;
 
 import java.util.ArrayList;
 import java.util.Random;
 
-import edu.sdsmt.team6.odetoballonstowerdefence.ModelDataTypes.Balloon;
-import edu.sdsmt.team6.odetoballonstowerdefence.ModelDataTypes.CollectionArea;
-import edu.sdsmt.team6.odetoballonstowerdefence.ModelDataTypes.CollectionCircle;
-import edu.sdsmt.team6.odetoballonstowerdefence.ModelDataTypes.CollectionLine;
-import edu.sdsmt.team6.odetoballonstowerdefence.ModelDataTypes.CollectionRectangle;
-import edu.sdsmt.team6.odetoballonstowerdefence.ModelDataTypes.PlayerModel;
+import edu.sdsmt.team4.odetoballonstowerdefence.ModelDataTypes.Balloon;
+import edu.sdsmt.team4.odetoballonstowerdefence.ModelDataTypes.CollectionArea;
+import edu.sdsmt.team4.odetoballonstowerdefence.ModelDataTypes.CollectionCircle;
+import edu.sdsmt.team4.odetoballonstowerdefence.ModelDataTypes.CollectionLine;
+import edu.sdsmt.team4.odetoballonstowerdefence.ModelDataTypes.CollectionRectangle;
+import edu.sdsmt.team4.odetoballonstowerdefence.ModelDataTypes.PlayerModel;
 
 public class GameModel {
 
