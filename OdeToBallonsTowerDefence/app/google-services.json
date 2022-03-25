@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "321031152908",
+    "project_id": "odetobloonstowerdefence",
+    "storage_bucket": "odetobloonstowerdefence.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:321031152908:android:6536448d646cefa5b59529",
+        "android_client_info": {
+          "package_name": "edu.sdsmt.team4.odetoballonstowerdefence"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "321031152908-bcikk5h9uolp5rhc4fatsc479p003ao5.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA45Bq-v3YdoKRdRF0OBXGmvm40LWht2SY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "321031152908-bcikk5h9uolp5rhc4fatsc479p003ao5.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
