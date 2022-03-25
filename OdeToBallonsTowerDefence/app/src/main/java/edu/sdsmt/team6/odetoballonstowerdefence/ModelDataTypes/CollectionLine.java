@@ -42,7 +42,7 @@ public class CollectionLine extends CollectionArea{
     }
 
     private boolean balloonInArea(Balloon b){
-        return distanceFromLine(b) < 40.0;
+        return distanceFromLine(b) < 30.0;
     }
 
     private double distanceFromLine(Balloon b) {
@@ -55,7 +55,13 @@ public class CollectionLine extends CollectionArea{
         double tempX = this.getX() + u * xDelta;//closest point on line to balloon
         double tempY = this.getY() + u * yDelta;
 
-        return distanceFormula(b.getX(), b.getY(), tempX, tempY);
+        if( b.getY() < screenWidth * 0.2 + 10 || b.getY() < secondYLoc - 10 ){
+            return 1000.0;
+        }
+        else {
+            return distanceFormula(b.getX(), b.getY(), tempX, tempY);
+        }
+
     }
 
 }

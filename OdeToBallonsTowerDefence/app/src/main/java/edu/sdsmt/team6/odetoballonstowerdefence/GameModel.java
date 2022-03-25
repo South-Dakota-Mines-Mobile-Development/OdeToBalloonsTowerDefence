@@ -14,11 +14,11 @@ public class GameModel {
 
     public enum PlayerTurn {PLAYER_ONE, PLAYER_TWO}
 
-    private ArrayList<Balloon> balloons = new ArrayList<>();
+    private final ArrayList<Balloon> balloons = new ArrayList<>();
     private CollectionArea collectionArea = null;
     private PlayerTurn playerTurn = PlayerTurn.PLAYER_ONE;
-    private PlayerModel playerOne= new PlayerModel("player1");
-    private PlayerModel playerTwo = new PlayerModel("player2");
+    private final PlayerModel playerOne= new PlayerModel("player1");
+    private final PlayerModel playerTwo = new PlayerModel("player2");
     private int roundNumber = 0;
     private int roundsToEnd;
     private int collectionAreaType = CollectionArea.RECTANGLE; //default is rectangle
@@ -41,9 +41,9 @@ public class GameModel {
         if(!initialized){
             Random rand = new Random();
             for (int i = 0; i < numBalloons; i++) {
-                //arbitrarily adding a 10 pixel padding around the screen
-                int locX = rand.nextInt(screenWidth-20) + 10;
-                int locY = rand.nextInt(screenHeight-20) + 10;
+                //arbitrarily adding a 20 pixel padding around the screen
+                int locX = rand.nextInt(screenWidth-40) + 20;
+                int locY = rand.nextInt(screenHeight-40) + 20;
 
                 balloons.add(new Balloon(locX, locY));
             }

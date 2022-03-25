@@ -18,7 +18,6 @@
     <string name="dart">Select Dart (line)</string>
     <string name="dartBtn">select dart</string>
     <string name="make_move">Make Move</string>
-    <string name="reset_move">Reset Move</string>
     <string name="roundLabel">Round</string>
     <string name="roundCounterInitialValue">0</string>
     <string name="selectModeBtn">Select Mode</string>
@@ -35,12 +34,23 @@
             collection method! Note\n
             \ta. Circle : collects everything that has center within it.\n
             \tb. Rectangle : Has a chance to collect if center within borders,
-               but the larger the rectangle area the lower the chance to collect object is, starting at 50%.\n
+               but the larger the rectangle area the lower the chance to collect object is, starting at 50%%.\n
             \tNote Rectangle must be draw from the upper left corner to bottom right Note\n
-            \tc. Line : Has a 70% chance of popping balloon if line passes close to center\n
-            \tNote Line has a buffer so you do not be directly on it extends out perpendicular to the line
-                with a radius at the end!  Note\n
+            \tc. Line : Has a 70%% chance of popping balloon if line passes close to center\n
+            \tNote Line has a buffer so you do not be directly on it extends out perpendicular to the line Note\n
         5. Game is over when the number of rounds have been reached, or their is no balloons left on screen\n
         6. Start over!
     </string>
+    <string name="game_over">Game Over!</string>
+    <string name="FinalScoreP2">0</string>
+    <string name="p2_name">P2 Name</string>
+    <string name="finalScoreP1">0</string>
+    <string name="p1_name">P1 Name</string>
+    <string name="rounds_5">Rounds: 5</string>
+    <string name="rounds">Rounds</string>
+    <string name="player_one_s_name">Player one\'s name</string>
+    <string name="player_two_s_name">Player two\'s name</string>
+    <string name="RoundPickerSpeakableText">Choose number of rounds</string>
+    <string name="player_two_s_name2">Player two\'s name</string>
+    <string name="player_one_s_name2">Player one\'s name</string>
 </resources>

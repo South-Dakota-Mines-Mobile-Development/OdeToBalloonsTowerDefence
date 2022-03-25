@@ -24,25 +24,21 @@ public class CollectionRectangle extends CollectionArea {
     }
 
     private boolean balloonInArea(Balloon b){
-        return betweenXCoor(b) && betweenYCoor(b);
+        return betweenX(b) && betweenY(b);
     }
 
-    private boolean betweenXCoor(Balloon b){
-        int oppPointX = this.getX() + width;
-        if(oppPointX < this.getX()){
-            return b.getX() >= oppPointX && b.getX() <= this.getX();
-        }else{
-            return b.getX() >= this.getX() && b.getX() <= oppPointX;
-        }
+    private boolean betweenX(Balloon b){
+        int left = Math.min(getX(), getX() + width);
+        int right = Math.max(getX(), getX() + width);
+
+        return b.getX() >= left && b.getX() <= right;
     }
 
-    private boolean betweenYCoor(Balloon b){
-        int oppPointY = this.getY() + height;
-        if(oppPointY < this.getX()){
-            return b.getX() >= oppPointY && b.getX() <= this.getX();
-        }else{
-            return b.getX() >= this.getX() && b.getX() <= oppPointY;
-        }
+    private boolean betweenY(Balloon b){
+        int top = Math.min(getY(), getY() + height);
+        int bottom = Math.max(getY(), getY() + height);
+
+        return b.getY() >= top && b.getX() <= bottom;
     }
 
     private int chanceOfCapture(){

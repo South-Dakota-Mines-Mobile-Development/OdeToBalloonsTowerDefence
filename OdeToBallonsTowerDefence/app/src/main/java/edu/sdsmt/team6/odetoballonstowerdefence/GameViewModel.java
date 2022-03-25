@@ -8,7 +8,6 @@ import java.util.ArrayList;
 
 import edu.sdsmt.team6.odetoballonstowerdefence.ModelDataTypes.Balloon;
 import edu.sdsmt.team6.odetoballonstowerdefence.ModelDataTypes.CollectionArea;
-import edu.sdsmt.team6.odetoballonstowerdefence.ModelDataTypes.CollectionRectangle;
 import edu.sdsmt.team6.odetoballonstowerdefence.ModelDataTypes.PlayerModel;
 
 public class GameViewModel extends ViewModel {
