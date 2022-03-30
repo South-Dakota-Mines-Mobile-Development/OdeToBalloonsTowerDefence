@@ -1,5 +1,8 @@
 package edu.sdsmt.team4.odetoballonstowerdefence;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseReference;
+
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -156,5 +159,37 @@ public class GameModel {
 
     public boolean gameIsOver(){
         return roundsToEnd == roundNumber || getBalloons().size() == 0;
+    }
+
+    /**
+     * Function to save the players and balloons to the server.
+     *
+     * @param db Database reference to the current game being played.
+     */
+    public void saveJson(DatabaseReference db) {
+        // save players
+        playerOne.saveJson(db, 1);
+        playerTwo.saveJson(db, 2);
+
+        for (int i = 1; i <= balloons.size(); i++) {
+            // passed screen height and width to store relative coordinates
+            balloons.get(i - 1).saveJson(db, i, screenWidth, screenHeight);
+        }
+    }
+
+    /**
+     * Function to load data from the database.
+     *
+     * @param db Snapshot of the game currently being played.
+     */
+    public void loadJson(DataSnapshot db) {
+        // load players
+        playerOne.loadJson(db, 1);
+        playerTwo.loadJson(db, 2);
+
+        for (int i = 1; i <= balloons.size(); i++) {
+            // passed screen height and width to store relative coordinates
+            balloons.get(i - 1).loadJson(db, i, screenWidth, screenHeight);
+        }
     }
 }
