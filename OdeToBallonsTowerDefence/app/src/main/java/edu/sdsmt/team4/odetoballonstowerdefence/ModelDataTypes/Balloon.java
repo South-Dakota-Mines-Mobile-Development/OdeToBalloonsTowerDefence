@@ -46,8 +46,8 @@ public class Balloon {
         }
         DataSnapshot balloonDb = db.child("balloon" + index);
         // convert locations relative position on server to pixels of local device
-        xLocation = (int)Float.parseFloat(balloonDb.child("x").getValue().toString()) * screenWitch;
-        yLocation = (int)Float.parseFloat(balloonDb.child("y").getValue().toString()) * screenHeight;
+        xLocation = (int)(Float.parseFloat(balloonDb.child("x").getValue().toString()) * screenWitch);
+        yLocation = (int)(Float.parseFloat(balloonDb.child("y").getValue().toString()) * screenHeight);
         popped = (boolean)balloonDb.child("popped").getValue();
     }
 }
