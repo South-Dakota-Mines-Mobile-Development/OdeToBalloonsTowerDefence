@@ -2,6 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="edu.sdsmt.team4.odetoballonstowerdefence">
 
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -9,6 +10,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.OdeToBallonsTowerDefence">
+
         <activity
             android:name="edu.sdsmt.team4.odetoballonstowerdefence.EndGameActivity"
             android:exported="false" />
@@ -23,6 +25,9 @@
             android:exported="false" />
         <activity
             android:name="edu.sdsmt.team4.odetoballonstowerdefence.MainActivity"
+            android:exported="false" />
+        <activity
+            android:name="edu.sdsmt.team4.odetoballonstowerdefence.LoginActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
