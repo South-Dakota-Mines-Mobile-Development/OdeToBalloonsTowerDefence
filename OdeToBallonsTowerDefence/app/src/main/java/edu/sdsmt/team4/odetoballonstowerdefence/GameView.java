@@ -15,6 +15,9 @@ import android.view.View;
 
 import androidx.annotation.Nullable;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseReference;
+
 import java.util.ArrayList;
 
 import edu.sdsmt.team4.odetoballonstowerdefence.ModelDataTypes.Balloon;
@@ -149,5 +152,13 @@ public class GameView extends View {
                     collectionArea.getY() + collectionArea.getHeight(),
                     myPaint);
         }
+    }
+
+    public void saveJson(DatabaseReference db) {
+        viewModel.saveJson(db);
+    }
+
+    public void loadJson(DataSnapshot db) {
+        viewModel.loadJson(db);
     }
 }

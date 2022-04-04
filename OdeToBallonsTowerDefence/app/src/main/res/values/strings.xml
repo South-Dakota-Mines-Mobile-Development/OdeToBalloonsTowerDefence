@@ -53,4 +53,7 @@
     <string name="RoundPickerSpeakableText">Choose number of rounds</string>
     <string name="player_two_s_name2">Player two\'s name</string>
     <string name="player_one_s_name2">Player one\'s name</string>
+    <string name="state_failed">Failed to get game state</string>
+    <string name="save_failed">Failed to save data to cloud</string>
+    <string name="load_failed">Failed to load data from cloud</string>
 </resources>
