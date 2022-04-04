@@ -124,5 +124,6 @@ public class GameViewModel extends ViewModel {
 
     public void loadJson(DataSnapshot db) {
         gameModel.loadJson(db);
+        notifyStateChange();
     }
 }
