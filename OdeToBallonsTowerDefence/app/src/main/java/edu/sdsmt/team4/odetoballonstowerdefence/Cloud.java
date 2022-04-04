@@ -19,7 +19,7 @@ public class Cloud {
     }
 
     /**
-     *
+     * Initially upload the balloons and players if player 1 or sync if player 2.
      *
      * @param view GameView to save.
      */
