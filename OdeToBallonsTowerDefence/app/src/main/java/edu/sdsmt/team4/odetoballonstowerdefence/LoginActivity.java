@@ -16,8 +16,11 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.HashMap;
 
@@ -27,6 +30,7 @@ public class LoginActivity extends AppCompatActivity {
     private EditText passwordText;
     private final FirebaseAuth userAuth = FirebaseAuth.getInstance();
     private FirebaseUser firebaseUser;
+    private final DatabaseReference rootRef = FirebaseDatabase.getInstance().getReference();
     private final DatabaseReference userRef = FirebaseDatabase.getInstance().getReference().child("users");
 
     @Override
@@ -39,9 +43,15 @@ public class LoginActivity extends AppCompatActivity {
 
         Button signupButton = findViewById(R.id.signup);
         Button loginButton = findViewById(R.id.login);
+        Button resetButton = findViewById(R.id.reset);
 
         signupButton.setOnClickListener(this::signup);
         loginButton.setOnClickListener(this::signin);
+        resetButton.setOnClickListener(this::resetDatabase);
+    }
+
+    public void resetDatabase(View view) {
+        this.rootRef.setValue(null);
     }
 
     private void signup(View view) {
