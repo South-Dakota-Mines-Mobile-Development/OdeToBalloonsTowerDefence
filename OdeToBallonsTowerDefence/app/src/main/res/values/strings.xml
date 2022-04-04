@@ -55,4 +55,5 @@
     <string name="player_one_s_name2">Player one\'s name</string>
     <string name="username_hint">username</string>
     <string name="login_button_text">Login</string>
+    <string name="signup_button_text">Sign Up</string>
 </resources>
