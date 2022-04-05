@@ -70,7 +70,17 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     public void resetDatabase(View view) {
-        this.rootRef.setValue(null);
+        DatabaseReference gamesRef = this.rootRef.child("games");
+        gamesRef.setValue(null);
+
+        DatabaseReference stateRef = this.rootRef.child("state");
+        DatabaseReference player1Ref = stateRef.child("player1waiting");
+        player1Ref.setValue(false);
+
+        DatabaseReference player2Ref = stateRef.child("player2waiting");
+        player2Ref.setValue(false);
+
+        view.post(() -> Toast.makeText(view.getContext(), "Reset Database.", Toast.LENGTH_SHORT).show());
     }
 
     public void rememberMe(View view) {
