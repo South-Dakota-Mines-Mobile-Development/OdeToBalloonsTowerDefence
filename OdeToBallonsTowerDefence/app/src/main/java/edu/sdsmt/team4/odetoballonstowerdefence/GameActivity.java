@@ -98,11 +98,49 @@ public class GameActivity extends AppCompatActivity {
                     ((TextView)findViewById(R.id.player1Label))
                             .setText(R.string.player1LabelActive);
                     ((TextView)findViewById(R.id.player2Label)).setText(R.string.player2Label);
+                    cloud.turn(gameView, new CloudCallback() {
+                        @Override
+                        public void playersWaitingCallback(boolean p1Waiting, boolean p2Waiting) {
+                            // should never be called
+                        }
+
+                        @Override
+                        public void turnCallback(boolean isPlayer1) {
+                            if (isPlayer1) {
+                                selectButton.setEnabled(true);
+                                gameView.setTouchEnabled(true);
+                            }
+                            else {
+                                selectButton.setEnabled(false);
+                                gameView.setTouchEnabled(false);
+                                moveButton.setEnabled(false);
+                            }
+                        }
+                    });
                     break;
                 case PLAYER_TWO:
                     ((TextView)findViewById(R.id.player2Label))
                             .setText(R.string.player2LabelActive);
                     ((TextView)findViewById(R.id.player1Label)).setText(R.string.player1Label);
+                    cloud.turn(gameView, new CloudCallback() {
+                        @Override
+                        public void playersWaitingCallback(boolean p1Waiting, boolean p2Waiting) {
+                            // should never be called
+                        }
+
+                        @Override
+                        public void turnCallback(boolean isPlayer1) {
+                            if (!isPlayer1) {
+                                selectButton.setEnabled(true);
+                                gameView.setTouchEnabled(true);
+                            }
+                            else {
+                                selectButton.setEnabled(false);
+                                gameView.setTouchEnabled(false);
+                                moveButton.setEnabled(false);
+                            }
+                        }
+                    });
                     break;
             }
         });

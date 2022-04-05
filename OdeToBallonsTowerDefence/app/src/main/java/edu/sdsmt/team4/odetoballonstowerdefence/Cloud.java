@@ -5,6 +5,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -17,7 +18,8 @@ public class Cloud {
     private GameView gameView = null;
     private ValueEventListener stateEventListener = null;
     private ValueEventListener gameEventListener = null;
-    private boolean showButtons = true;
+    private ValueEventListener turnEventListener = null;
+    private FirebaseAuth auth = FirebaseAuth.getInstance();
 
     public Cloud() {
 
@@ -37,11 +39,14 @@ public class Cloud {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 currentGame = dataSnapshot.child("game").getValue().toString();
+                //DataSnapshot state = dataSnapshot.child("state");
+
+                String p1Name = dataSnapshot.child("player1name").getValue().toString();
+                String p2Name = dataSnapshot.child("player2name").getValue().toString();
 
                 // check is you are player1
-                if (!player1) {
-                    showButtons = false;
-                    // if if not join load the game
+                if (auth.getCurrentUser().getEmail().equals(p2Name)) {
+                    // if not join load the game
                     loadFromCloud(view);
                 }
                 else {
@@ -75,11 +80,9 @@ public class Cloud {
             public void onDataChange(DataSnapshot dataSnapshot) {
 
                 if (dataSnapshot.getChildrenCount() > 27 && dataSnapshot.child("gamemodel").getChildrenCount() > 2) {
-                    gameView.loadJson(dataSnapshot, showButtons);
+                    gameView.loadJson(dataSnapshot);
                     gameView.invalidate();
                 }
-
-                boolean showButtons = true;
             }
 
             @Override
@@ -124,6 +127,8 @@ public class Cloud {
                     ref.removeEventListener(stateEventListener);
                 if (gameEventListener != null)
                     gameRef.removeEventListener(gameEventListener);
+                if (turnEventListener != null)
+                    ref.removeEventListener(turnEventListener);
             }
 
             @Override
@@ -174,6 +179,33 @@ public class Cloud {
         ref.addValueEventListener(stateEventListener);
     }
 
+    public void turn(GameView view, CloudCallback cc) {
+        DatabaseReference ref = database.getReference().child("state");
+
+        final State state = new State();
+
+        ref.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                String p1Name = dataSnapshot.child("player1name").getValue().toString();
+                String p2Name = dataSnapshot.child("player2name").getValue().toString();
+
+                if (auth.getCurrentUser().getEmail().equals(p1Name)) {
+                    cc.turnCallback(true);
+                }
+                else {
+                    cc.turnCallback(false);
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError error) {
+                //check for errors
+                Toast.makeText(view.getContext(), R.string.failed_state, Toast.LENGTH_LONG).show();
+            }
+        });
+    }
+
     private class State {
         public boolean player1Waiting = false;
         public boolean player2Waiting = false;
@@ -183,4 +215,5 @@ public class Cloud {
 // Callback interface used for getting which players are waiting.
 interface CloudCallback {
     public void playersWaitingCallback(boolean p1Waiting, boolean p2Waiting);
+    public void turnCallback(boolean isPlayer1);
 }

@@ -34,6 +34,7 @@ public class GameView extends View {
     private Button selectButton = null;
     private Bitmap redBloon = null;
     private GameViewModel viewModel;
+    private boolean touchEnabled = false;
 
     public GameView(Context context) {
         super(context);
@@ -60,19 +61,25 @@ public class GameView extends View {
     public void setViewModel(GameViewModel viewModel){
         this.viewModel = viewModel;
     }
+    public void setTouchEnabled(boolean enabled) {
+        touchEnabled = enabled;
+    }
 
     @SuppressLint("ClickableViewAccessibility")
     @Override
     public boolean onTouchEvent(MotionEvent event) {
-        switch(event.getActionMasked()) {
-            case MotionEvent.ACTION_DOWN:
-                viewModel.onInitialPress((int)event.getX(), (int)event.getY());
-                return true;
+        if (touchEnabled){
+            switch(event.getActionMasked()) {
+                case MotionEvent.ACTION_DOWN:
+                    viewModel.onInitialPress((int)event.getX(), (int)event.getY());
+                    return true;
 
-            case MotionEvent.ACTION_MOVE:
-                viewModel.onMoveOrSecondaryPress((int)event.getX(), (int)event.getY());
-                return true;
+                case MotionEvent.ACTION_MOVE:
+                    viewModel.onMoveOrSecondaryPress((int)event.getX(), (int)event.getY());
+                    return true;
+            }
         }
+
         return super.onTouchEvent(event);
     }
 
@@ -160,7 +167,7 @@ public class GameView extends View {
         viewModel.saveJson(db);
     }
 
-    public void loadJson(DataSnapshot db, boolean showButtons) {
+    public void loadJson(DataSnapshot db) {
         viewModel.loadJson(db);
     }
 
