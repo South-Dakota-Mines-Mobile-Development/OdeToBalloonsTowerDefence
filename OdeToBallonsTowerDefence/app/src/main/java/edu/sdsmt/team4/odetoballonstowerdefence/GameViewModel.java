@@ -4,6 +4,9 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseReference;
+
 import java.util.ArrayList;
 
 import edu.sdsmt.team4.odetoballonstowerdefence.ModelDataTypes.Balloon;
@@ -113,5 +116,14 @@ public class GameViewModel extends ViewModel {
         currentRoundNumber.setValue(gameModel.getRound());
         currentPlayerTurn.setValue(gameModel.getPlayerTurn());
         isGameOver.setValue(gameModel.gameIsOver());
+    }
+
+    public void saveJson(DatabaseReference db) {
+        gameModel.saveJson(db);
+    }
+
+    public void loadJson(DataSnapshot db) {
+        gameModel.loadJson(db);
+        notifyStateChange();
     }
 }

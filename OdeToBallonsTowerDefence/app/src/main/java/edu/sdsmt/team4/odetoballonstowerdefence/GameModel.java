@@ -175,6 +175,11 @@ public class GameModel {
             // passed screen height and width to store relative coordinates
             balloons.get(i - 1).saveJson(db, i, screenWidth, screenHeight);
         }
+
+        db.child("gamemodel").child("roundstoend").setValue(roundsToEnd);
+        db.child("gamemodel").child("roundnumber").setValue(roundNumber);
+        db.child("gamemodel").child("playerturn").setValue(playerTurn);
+
     }
 
     /**
@@ -191,5 +196,9 @@ public class GameModel {
             // passed screen height and width to store relative coordinates
             balloons.get(i - 1).loadJson(db, i, screenWidth, screenHeight);
         }
+
+        roundsToEnd = Integer.parseInt(db.child("gamemodel").child("roundstoend").getValue().toString());
+        roundNumber = Integer.parseInt(db.child("gamemodel").child("roundnumber").getValue().toString());
+        playerTurn = PlayerTurn.valueOf(db.child("gamemodel").child("playerturn").getValue().toString());
     }
 }
