@@ -53,8 +53,9 @@
     <string name="RoundPickerSpeakableText">Choose number of rounds</string>
     <string name="player_two_s_name2">Player two\'s name</string>
     <string name="player_one_s_name2">Player one\'s name</string>
-    <string name="username_hint">username</string>
+    <string name="username_hint">email@gmail.com</string>
     <string name="login_button_text">Login</string>
     <string name="signup_button_text">Sign Up</string>
     <string name="reset_button_text">Reset</string>
+    <string name="remember_me">Remember Me</string>
 </resources>
