@@ -58,4 +58,5 @@
     <string name="signup_button_text">Sign Up</string>
     <string name="reset_button_text">Reset</string>
     <string name="remember_me">Remember Me</string>
+    <string name="screen_name">Screen Name</string>
 </resources>
