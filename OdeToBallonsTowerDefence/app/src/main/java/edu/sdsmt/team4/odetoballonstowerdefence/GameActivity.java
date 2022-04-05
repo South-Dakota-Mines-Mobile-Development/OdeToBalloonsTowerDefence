@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 import java.util.Objects;
@@ -16,6 +17,11 @@ import edu.sdsmt.team4.odetoballonstowerdefence.ModelDataTypes.PlayerModel;
 public class GameActivity extends AppCompatActivity {
     private GameViewModel viewModel;
     private GameView gameView = null;
+    private Cloud cloud = null;
+    private Button moveButton = null;
+    private Button selectButton = null;
+    // replace with check in state on database!
+    private boolean isPlayer1 = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,10 +42,14 @@ public class GameActivity extends AppCompatActivity {
 
         //Get Views
         gameView = findViewById(R.id.gameView);
+        moveButton = findViewById(R.id.makeMoveButton);
+        selectButton = findViewById(R.id.selectMode);
         viewModel = new ViewModelProvider(this).get(GameViewModel.class);
         viewModel.onGameSizeChanged(gameViewSize, gameViewSize);
         gameView.setViewModel(viewModel);
-
+        gameView.setButtons(moveButton, selectButton);
+        cloud = new Cloud();
+        cloud.init(gameView, isPlayer1);
 
         findViewById(R.id.gameView).addOnLayoutChangeListener(
                 (v, left, top, right, bottom, lastLeft, lastTop, lastRight, lastBottom) ->
@@ -77,7 +87,7 @@ public class GameActivity extends AppCompatActivity {
                 gameOver.putExtra("edu.sdsmt.bloons.p2Score", p2.getScore());
                 gameOver.putExtra("edu.sdsmt.bloons.p1Name", p1.getName());
                 gameOver.putExtra("edu.sdsmt.bloons.p2Name", p2.getName());
-
+                cloud.resetState();
                 startActivity(gameOver);
             }
         });
@@ -102,7 +112,10 @@ public class GameActivity extends AppCompatActivity {
                     .setText(String.valueOf(roundNumber)));
 
         findViewById(R.id.makeMoveButton)
-                .setOnClickListener(v -> viewModel.onMakeMove());
+                .setOnClickListener(v -> {
+                    viewModel.onMakeMove();
+                    cloud.saveToCloud(gameView);
+                });
 
 
         Intent intent = getIntent();
