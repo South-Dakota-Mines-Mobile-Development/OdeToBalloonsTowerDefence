@@ -1,10 +1,13 @@
 package edu.sdsmt.team4.odetoballonstowerdefence;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -38,20 +41,52 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
+        SharedPreferences sharedPreferences = getSharedPreferences("ballons", MODE_PRIVATE);
+
+        String screenname = sharedPreferences.getString("screenname", "");
+        String email = sharedPreferences.getString("email", "email@gmail.com");
+        String password = sharedPreferences.getString("password", "");
+        Boolean checkboxChecked = sharedPreferences.getBoolean("checked", false);
+
         this.usernameText = findViewById(R.id.usernameInput);
         this.passwordText = findViewById(R.id.passwordInput);
+
+        this.usernameText.setText(email);
+        this.passwordText.setText(password);
 
         Button signupButton = findViewById(R.id.signup);
         Button loginButton = findViewById(R.id.login);
         Button resetButton = findViewById(R.id.reset);
+        CheckBox rememberMeCheckbox = findViewById(R.id.rememberMe);
+        rememberMeCheckbox.setChecked(checkboxChecked);
 
         signupButton.setOnClickListener(this::signup);
         loginButton.setOnClickListener(this::signin);
         resetButton.setOnClickListener(this::resetDatabase);
+        rememberMeCheckbox.setOnClickListener(this::rememberMe);
     }
 
     public void resetDatabase(View view) {
         this.rootRef.setValue(null);
+    }
+
+    public void rememberMe(View view) {
+        CheckBox rememberMeCheckbox = findViewById(R.id.rememberMe);
+        SharedPreferences sharedPreferences = getSharedPreferences("ballons",MODE_PRIVATE);
+        SharedPreferences.Editor myEdit = sharedPreferences.edit();
+
+        if (rememberMeCheckbox.isChecked()) {
+            myEdit.putBoolean("checked", true);
+            myEdit.putString("screenname", "test");
+            myEdit.putString("email", this.usernameText.getText().toString());
+            myEdit.putString("password", this.passwordText.getText().toString());
+
+            myEdit.commit();
+        } else {
+            myEdit.clear();
+            myEdit.commit();
+        }
+
     }
 
     private void signup(View view) {
