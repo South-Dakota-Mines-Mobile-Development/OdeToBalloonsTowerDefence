@@ -12,6 +12,7 @@ import android.util.AttributeSet;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.Button;
 
 import androidx.annotation.Nullable;
 
@@ -29,7 +30,8 @@ import edu.sdsmt.team4.odetoballonstowerdefence.ModelDataTypes.CollectionRectang
 public class GameView extends View {
     private ArrayList<Balloon> bloons = null;
     private CollectionArea collectionArea = null;
-
+    private Button moveButton = null;
+    private Button selectButton = null;
     private Bitmap redBloon = null;
     private GameViewModel viewModel;
 
@@ -158,7 +160,12 @@ public class GameView extends View {
         viewModel.saveJson(db);
     }
 
-    public void loadJson(DataSnapshot db) {
+    public void loadJson(DataSnapshot db, boolean showButtons) {
         viewModel.loadJson(db);
+    }
+
+    public void setButtons(Button move, Button select) {
+        moveButton = move;
+        selectButton = select;
     }
 }

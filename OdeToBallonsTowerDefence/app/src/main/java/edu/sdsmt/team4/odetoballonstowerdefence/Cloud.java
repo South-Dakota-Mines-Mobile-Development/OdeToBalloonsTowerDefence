@@ -3,6 +3,8 @@ package edu.sdsmt.team4.odetoballonstowerdefence;
 import android.view.View;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -13,6 +15,9 @@ public class Cloud {
     private final static FirebaseDatabase database = FirebaseDatabase.getInstance();
     private String currentGame = null;
     private GameView gameView = null;
+    private ValueEventListener stateEventListener = null;
+    private ValueEventListener gameEventListener = null;
+    private boolean showButtons = true;
 
     public Cloud() {
 
@@ -35,18 +40,19 @@ public class Cloud {
 
                 // check is you are player1
                 if (!player1) {
+                    showButtons = false;
                     // if if not join load the game
-                    ref.child("player2waiting").setValue(true);
                     loadFromCloud(view);
                 }
                 else {
                     // if so, create the game
-                    ref.child("player1waiting").setValue(true);
                     currentGame = database.getReference().push().getKey();
 
                     ref.child("game").setValue(currentGame);
 
                     saveToCloud(view);
+
+                    loadFromCloud(view);
                 }
             }
 
@@ -64,20 +70,25 @@ public class Cloud {
 
         gameView = view;
 
-        gameRef.addValueEventListener(new ValueEventListener() {
+        gameEventListener = new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                if (dataSnapshot.getChildrenCount() > 26 && dataSnapshot.child("balloon25").getChildrenCount() > 2) {
-                    gameView.loadJson(dataSnapshot);
+
+                if (dataSnapshot.getChildrenCount() > 27 && dataSnapshot.child("gamemodel").getChildrenCount() > 2) {
+                    gameView.loadJson(dataSnapshot, showButtons);
                     gameView.invalidate();
                 }
+
+                boolean showButtons = true;
             }
 
             @Override
             public void onCancelled(DatabaseError error) {
                 Toast.makeText(gameView.getContext(), R.string.load_failed, Toast.LENGTH_LONG).show();
             }
-        });
+        };
+
+        gameRef.addValueEventListener(gameEventListener);
     }
 
     public void saveToCloud(GameView view) {
@@ -96,23 +107,36 @@ public class Cloud {
             }});
     }
 
+    /**
+     * Resets the game state in the database (probably called at the end of the game).
+     */
     public void resetState() {
+
         DatabaseReference ref = database.getReference().child("state");
+        DatabaseReference gameRef = database.getReference().child("games").child(currentGame);
 
-        ref.setValue(new DatabaseReference.CompletionListener() {
-            public void onComplete(DatabaseError databaseError, DatabaseReference databaseReference) {
-                if(databaseError != null) {
-                    // Error condition!
-
-                }
+        ref.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
                 ref.child("player1waiting").setValue(false);
                 ref.child("player2waiting").setValue(false);
-            }});
+                if (stateEventListener != null)
+                    ref.removeEventListener(stateEventListener);
+                if (gameEventListener != null)
+                    gameRef.removeEventListener(gameEventListener);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
     }
 
     /**
      * Function to get which players are waiting.
      * Use a new CloudCallback like a listener when calling.
+     * The callback will be called anytime the state child is changed in the database
      *
      * @param view Used to display failed toast
      * @param cc The CloudCallback used to return the values in an asynchronous fashion
@@ -122,12 +146,21 @@ public class Cloud {
 
         final State state = new State();
 
-        ref.addListenerForSingleValueEvent(new ValueEventListener() {
+        stateEventListener = new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 state.player1Waiting = (boolean)dataSnapshot.child("player1waiting").getValue();
                 state.player2Waiting = (boolean)dataSnapshot.child("player2waiting").getValue();
+                //game might be unnecessary
                 currentGame = dataSnapshot.child("game").getValue().toString();
+
+                if (state.player1Waiting) {
+                    ref.child("player1waiting").setValue(true);
+                    //ref.child("player1name").setValue()
+                }
+                else {
+                    ref.child("player2waiting").setValue(true);
+                }
                 cc.playersWaitingCallback(state.player1Waiting, state.player2Waiting);
             }
 
@@ -136,7 +169,9 @@ public class Cloud {
                 //check for errors
                 Toast.makeText(view.getContext(), R.string.failed_state, Toast.LENGTH_LONG).show();
             }
-        });
+        };
+
+        ref.addValueEventListener(stateEventListener);
     }
 
     private class State {
