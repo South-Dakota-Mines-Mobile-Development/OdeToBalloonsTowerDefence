@@ -31,6 +31,7 @@ import java.util.HashMap;
 public class LoginActivity extends AppCompatActivity {
     private EditText usernameText;
     private EditText passwordText;
+    private EditText screenNameText;
     private final FirebaseAuth userAuth = FirebaseAuth.getInstance();
     private FirebaseUser firebaseUser;
     private final DatabaseReference rootRef = FirebaseDatabase.getInstance().getReference();
@@ -43,16 +44,18 @@ public class LoginActivity extends AppCompatActivity {
 
         SharedPreferences sharedPreferences = getSharedPreferences("ballons", MODE_PRIVATE);
 
-        String screenname = sharedPreferences.getString("screenname", "");
+        String screenname = sharedPreferences.getString("screenname", "Screen Name");
         String email = sharedPreferences.getString("email", "email@gmail.com");
         String password = sharedPreferences.getString("password", "");
         Boolean checkboxChecked = sharedPreferences.getBoolean("checked", false);
 
         this.usernameText = findViewById(R.id.usernameInput);
         this.passwordText = findViewById(R.id.passwordInput);
+        this.screenNameText = findViewById(R.id.screenNameInput);
 
         this.usernameText.setText(email);
         this.passwordText.setText(password);
+        this.screenNameText.setText(screenname);
 
         Button signupButton = findViewById(R.id.signup);
         Button loginButton = findViewById(R.id.login);
@@ -77,7 +80,7 @@ public class LoginActivity extends AppCompatActivity {
 
         if (rememberMeCheckbox.isChecked()) {
             myEdit.putBoolean("checked", true);
-            myEdit.putString("screenname", "test");
+            myEdit.putString("screenname", this.screenNameText.getText().toString());
             myEdit.putString("email", this.usernameText.getText().toString());
             myEdit.putString("password", this.passwordText.getText().toString());
 
@@ -92,6 +95,7 @@ public class LoginActivity extends AppCompatActivity {
     private void signup(View view) {
         String email = usernameText.getText().toString().trim();
         String password = passwordText.getText().toString().trim();
+        String screenName = screenNameText.getText().toString().trim();
 
         if (!validInput(email, password, view)) {
             return;
@@ -104,6 +108,7 @@ public class LoginActivity extends AppCompatActivity {
                 {
                     firebaseUser = userAuth.getCurrentUser();
                     HashMap<String, Object> result = new HashMap<>();
+                    result.put("/"+firebaseUser.getUid()+"/name", screenName);
                     result.put("/"+firebaseUser.getUid()+"/username", email);
                     result.put("/"+firebaseUser.getUid()+"/password", password);
                     userRef.updateChildren(result);
