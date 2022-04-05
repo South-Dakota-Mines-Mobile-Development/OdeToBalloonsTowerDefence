@@ -1,10 +1,13 @@
 package edu.sdsmt.team4.odetoballonstowerdefence;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -28,6 +31,7 @@ import java.util.HashMap;
 public class LoginActivity extends AppCompatActivity {
     private EditText usernameText;
     private EditText passwordText;
+    private EditText screenNameText;
     private final FirebaseAuth userAuth = FirebaseAuth.getInstance();
     private FirebaseUser firebaseUser;
     private final DatabaseReference rootRef = FirebaseDatabase.getInstance().getReference();
@@ -38,25 +42,70 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
+        SharedPreferences sharedPreferences = getSharedPreferences("ballons", MODE_PRIVATE);
+
+        String screenname = sharedPreferences.getString("screenname", "Screen Name");
+        String email = sharedPreferences.getString("email", "email@gmail.com");
+        String password = sharedPreferences.getString("password", "");
+        Boolean checkboxChecked = sharedPreferences.getBoolean("checked", false);
+
         this.usernameText = findViewById(R.id.usernameInput);
         this.passwordText = findViewById(R.id.passwordInput);
+        this.screenNameText = findViewById(R.id.screenNameInput);
+
+        this.usernameText.setText(email);
+        this.passwordText.setText(password);
+        this.screenNameText.setText(screenname);
 
         Button signupButton = findViewById(R.id.signup);
         Button loginButton = findViewById(R.id.login);
         Button resetButton = findViewById(R.id.reset);
+        CheckBox rememberMeCheckbox = findViewById(R.id.rememberMe);
+        rememberMeCheckbox.setChecked(checkboxChecked);
 
         signupButton.setOnClickListener(this::signup);
         loginButton.setOnClickListener(this::signin);
         resetButton.setOnClickListener(this::resetDatabase);
+        rememberMeCheckbox.setOnClickListener(this::rememberMe);
     }
 
     public void resetDatabase(View view) {
-        this.rootRef.setValue(null);
+        DatabaseReference gamesRef = this.rootRef.child("games");
+        gamesRef.setValue(null);
+
+        DatabaseReference stateRef = this.rootRef.child("state");
+        DatabaseReference player1Ref = stateRef.child("player1waiting");
+        player1Ref.setValue(false);
+
+        DatabaseReference player2Ref = stateRef.child("player2waiting");
+        player2Ref.setValue(false);
+
+        view.post(() -> Toast.makeText(view.getContext(), "Reset Database.", Toast.LENGTH_SHORT).show());
+    }
+
+    public void rememberMe(View view) {
+        CheckBox rememberMeCheckbox = findViewById(R.id.rememberMe);
+        SharedPreferences sharedPreferences = getSharedPreferences("ballons",MODE_PRIVATE);
+        SharedPreferences.Editor myEdit = sharedPreferences.edit();
+
+        if (rememberMeCheckbox.isChecked()) {
+            myEdit.putBoolean("checked", true);
+            myEdit.putString("screenname", this.screenNameText.getText().toString());
+            myEdit.putString("email", this.usernameText.getText().toString());
+            myEdit.putString("password", this.passwordText.getText().toString());
+
+            myEdit.commit();
+        } else {
+            myEdit.clear();
+            myEdit.commit();
+        }
+
     }
 
     private void signup(View view) {
         String email = usernameText.getText().toString().trim();
         String password = passwordText.getText().toString().trim();
+        String screenName = screenNameText.getText().toString().trim();
 
         if (!validInput(email, password, view)) {
             return;
@@ -69,6 +118,7 @@ public class LoginActivity extends AppCompatActivity {
                 {
                     firebaseUser = userAuth.getCurrentUser();
                     HashMap<String, Object> result = new HashMap<>();
+                    result.put("/"+firebaseUser.getUid()+"/name", screenName);
                     result.put("/"+firebaseUser.getUid()+"/username", email);
                     result.put("/"+firebaseUser.getUid()+"/password", password);
                     userRef.updateChildren(result);
