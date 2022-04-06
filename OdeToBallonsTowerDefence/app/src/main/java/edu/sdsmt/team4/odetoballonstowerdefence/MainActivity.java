@@ -68,6 +68,8 @@ import java.util.Objects;
 
 public class MainActivity extends AppCompatActivity {
 
+    private Cloud cloud = null;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) throws NullPointerException {
         super.onCreate(savedInstanceState);
@@ -85,30 +87,47 @@ public class MainActivity extends AppCompatActivity {
         Integer[] numbers = new Integer[]{3, 5, 10};
         ArrayAdapter<Integer> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, numbers);
         numberDropdown.setAdapter(adapter);
+
+        cloud = new Cloud();
+
+        cloud.playersWaiting(numberDropdown, new CloudCallback() {
+            @Override
+            public void playersWaitingCallback(boolean join) {
+                if (join) {
+                    cloud.getNames(numberDropdown, new NameCallback() {
+                        @Override
+                        public void names(String p1, String p2) {
+                            onGameStart(p1, p2);
+                        }
+                    });
+                }
+            }
+
+            @Override
+            public void turnCallback(boolean isPlayer1) {
+
+            }
+        });
+
+
     }
 
-    public void onGameStart(View view) {
+    public void onGameStart(String p1Name, String p2Name) {
         Intent intent = new Intent(this, GameActivity.class);
-
-        TextView firstNameInput = findViewById(R.id.playerOneTextbox);
-        String playerOne = firstNameInput.getText().toString();
-
-        TextView secondNameInput = findViewById(R.id.playerTwoTextbox);
-        String playerTwo = secondNameInput.getText().toString();
 
         Spinner numberDropdown = findViewById(R.id.numberSpinner);
         Integer roundNumber = (Integer)numberDropdown.getSelectedItem();
 
         intent.putExtra("edu.sdsmt.bloons.roundNumber", roundNumber);
-        intent.putExtra("edu.sdsmt.bloons.PlayerOneName", playerOne);
-        intent.putExtra("edu.sdsmt.bloons.PlayerTwoName", playerTwo);
+        intent.putExtra("edu.sdsmt.bloons.PlayerOneName", p1Name);
+        intent.putExtra("edu.sdsmt.bloons.PlayerTwoName", p2Name);
 
         startActivity(intent);
     }
 
-    public void howToActivity(View view) {
-        Intent intent = new Intent(this, HowToActivity.class);
+    public void onBackPressed() {
 
-        startActivity(intent);
+        cloud.resetState();
+        super.onBackPressed();
     }
 }
