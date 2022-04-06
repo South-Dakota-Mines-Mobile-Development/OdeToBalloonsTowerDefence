@@ -72,6 +72,16 @@ public class Cloud {
         });
     }
 
+    public void endGame() {
+        resetState();
+        DatabaseReference state = database.getReference().child("state");
+        state.child("endgame").setValue(true);
+
+        //WAIT
+
+        state.child("endgame").setValue(false);
+    }
+
     public void loadFromCloud(GameView view) {
 
         DatabaseReference gameRef = database.getReference().child("games").child(currentGame);

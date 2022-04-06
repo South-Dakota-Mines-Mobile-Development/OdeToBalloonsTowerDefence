@@ -3,9 +3,12 @@ package edu.sdsmt.team4.odetoballonstowerdefence;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -34,13 +37,6 @@ public class GameActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
-
-        //Disables the top action bar
-        try
-        {
-            Objects.requireNonNull(this.getSupportActionBar()).hide();
-        }
-        catch (NullPointerException ignored){}
 
         DisplayMetrics displayMetrics = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
@@ -191,6 +187,33 @@ public class GameActivity extends AppCompatActivity {
                 viewModel.onChangeCollectionAreaType(selectionMode);
             }
         }
+    }
+
+    /**
+     * Called when it is time to create the options menu
+     */
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.game_menu, menu);
+        return true;
+    }
+
+    /**
+     * Handle options menu selections
+     *
+     * @param item Menu item selected
+     */
+    @SuppressLint("NonConstantResourceId")
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+
+            case R.id.end_game:
+                cloud.endGame();
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }
 
