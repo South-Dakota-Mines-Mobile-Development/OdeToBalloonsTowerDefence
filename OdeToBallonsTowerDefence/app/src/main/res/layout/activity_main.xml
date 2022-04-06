@@ -22,50 +22,15 @@
         android:layout_height="0dp"
         android:layout_weight="2">
 
-        <EditText
-            android:id="@+id/playerOneTextbox"
-            android:layout_width="0dp"
+        <TextView
+            android:id="@+id/waitText"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="32dp"
-            android:layout_marginEnd="32dp"
-            android:layout_weight="1"
-            android:autofillHints="Player One"
-            android:ems="10"
-            android:hint="@string/player_one_s_name"
-            android:inputType="textPersonName"
-            android:minHeight="48dp"
-            android:text="@string/playerOneTextbox"
-            android:textAlignment="center"
-            android:textColor="#33691E"
-            app:layout_constraintBottom_toTopOf="@+id/playerTwoTextbox"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:ignore="TextContrastCheck" />
-
-        <EditText
-            android:id="@+id/playerTwoTextbox"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="32dp"
-            android:layout_marginEnd="32dp"
-            android:layout_weight="1"
-            android:autofillHints="Player Two"
-            android:ems="10"
-            android:hint="@string/player_two_s_name"
-            android:inputType="textPersonName"
-            android:minHeight="48dp"
-            android:text="@string/playerTwoTextbox"
-            android:textAlignment="center"
-            android:textColor="#33691E"
+            android:text="@string/wait_p1"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/playerOneTextbox"
-            tools:ignore="TextContrastCheck" />
-
+            app:layout_constraintTop_toTopOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -73,47 +38,17 @@
         android:layout_height="wrap_content"
         android:layout_weight="1">
 
-        <Button
-            android:id="@+id/howToPlayActivityBtn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:backgroundTint="#D51616"
-            android:fontFamily="@font/luckiest_guy"
-            android:onClick="howToActivity"
-            android:text="@string/howToPlayActivityBtn"
-            android:textColor="#FFF176"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/startButton"
-            tools:ignore="TextContrastCheck" />
-
-        <ImageButton
-            android:id="@+id/startButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:background="#00FFFFFF"
-            android:contentDescription="@string/startButton"
-            android:onClick="onGameStart"
-            android:src="@drawable/startbloon"
-            app:layout_constraintBottom_toTopOf="@+id/howToPlayActivityBtn"
-            app:layout_constraintEnd_toStartOf="@+id/numberSpinner"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
         <Spinner
             android:id="@+id/numberSpinner"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:contentDescription="@string/RoundPickerSpeakableText"
             android:minHeight="48dp"
-            app:layout_constraintBottom_toBottomOf="@+id/startButton"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/startButton"
-            app:layout_constraintTop_toTopOf="@+id/startButton" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView4" />
 
         <TextView
             android:id="@+id/textView4"

@@ -24,6 +24,13 @@ public class GameActivity extends AppCompatActivity {
     private boolean isPlayer1 = false;
 
     @Override
+    public void onBackPressed() {
+
+        cloud.resetState();
+        super.onBackPressed();
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
@@ -100,7 +107,7 @@ public class GameActivity extends AppCompatActivity {
                     ((TextView)findViewById(R.id.player2Label)).setText(R.string.player2Label);
                     cloud.turn(gameView, new CloudCallback() {
                         @Override
-                        public void playersWaitingCallback(boolean p1Waiting, boolean p2Waiting) {
+                        public void playersWaitingCallback(boolean join) {
                             // should never be called
                         }
 
@@ -124,7 +131,7 @@ public class GameActivity extends AppCompatActivity {
                     ((TextView)findViewById(R.id.player1Label)).setText(R.string.player1Label);
                     cloud.turn(gameView, new CloudCallback() {
                         @Override
-                        public void playersWaitingCallback(boolean p1Waiting, boolean p2Waiting) {
+                        public void playersWaitingCallback(boolean join) {
                             // should never be called
                         }
 

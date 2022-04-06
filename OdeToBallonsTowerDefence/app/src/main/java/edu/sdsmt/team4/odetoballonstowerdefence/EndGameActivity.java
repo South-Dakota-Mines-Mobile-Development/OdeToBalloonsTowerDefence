@@ -50,7 +50,7 @@ public class EndGameActivity extends AppCompatActivity {
     }
 
     public void restartGame(View view) {
-        Intent intent = new Intent(this, MainActivity.class);
+        Intent intent = new Intent(this, LoginActivity.class);
         startActivity(intent);
     }
 }
