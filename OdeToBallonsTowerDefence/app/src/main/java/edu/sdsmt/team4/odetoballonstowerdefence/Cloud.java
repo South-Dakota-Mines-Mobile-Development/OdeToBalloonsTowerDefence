@@ -127,6 +127,8 @@ public class Cloud {
                 ref.child("player1waiting").setValue(false);
                 ref.child("player2waiting").setValue(false);
                 ref.child("gamesetup").setValue(false);
+                ref.child("player1name").setValue("");
+                ref.child("player2name").setValue("");
                 if (stateEventListener != null)
                     ref.removeEventListener(stateEventListener);
                 if (gameEventListener != null)
@@ -159,6 +161,7 @@ public class Cloud {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 state.player1Waiting = (boolean)dataSnapshot.child("player1waiting").getValue();
+                String p1id = dataSnapshot.child("player1name").getValue().toString();
                 state.player2Waiting = (boolean)dataSnapshot.child("player2waiting").getValue();
                 //game might be unnecessary
                 currentGame = dataSnapshot.child("game").getValue().toString();
@@ -184,7 +187,7 @@ public class Cloud {
                     };
                     ref.addValueEventListener(stateEventListener);
                 }
-                else {
+                else if (!p1id.equals(auth.getCurrentUser().getUid())) {
                     ref.child("player2name").setValue(auth.getCurrentUser().getUid());
                     ref.child("player2waiting").setValue(true);
                     stateEventListener = new ValueEventListener() {
