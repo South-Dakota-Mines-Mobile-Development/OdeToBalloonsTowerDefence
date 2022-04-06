@@ -63,4 +63,5 @@
     <string name="reset_button_text">Reset</string>
     <string name="remember_me">Remember Me</string>
     <string name="screen_name">Screen Name</string>
+    <string name="wait_p1">Waiting for player 2</string>
 </resources>
