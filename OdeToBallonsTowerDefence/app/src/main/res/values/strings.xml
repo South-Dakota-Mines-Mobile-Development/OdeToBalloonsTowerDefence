@@ -1,8 +1,5 @@
 <resources>
     <string name="app_name">OdeToBalloonsTowerDefence</string>
-    <string name="playerOneTextbox">Player 1</string>
-    <string name="playerTwoTextbox">Player 2</string>
-    <string name="startButton">START</string>
     <string name="player1Label">Player 1</string>
     <string name="player1LabelActive"><b>Player 1</b></string>
     <string name="player2Label">Player 2</string>
@@ -23,7 +20,6 @@
     <string name="selectModeBtn">Select Mode</string>
     <string name="howToPlayTitle">How to Play</string>
     <string name="howToBackBtn">Back to Start</string>
-    <string name="howToPlayActivityBtn">How To Play</string>
     <string name="howToPlayText">
         1. Create a account.\n
         2. Sign in to your new account. If you are the first player to join you will enter a waiting screen.\n
@@ -49,13 +45,8 @@
     <string name="p1_name">P1 Name</string>
     <string name="rounds_5">Rounds: 5</string>
     <string name="rounds">Rounds</string>
-    <string name="player_one_s_name">Player one\'s name</string>
-    <string name="player_two_s_name">Player two\'s name</string>
     <string name="RoundPickerSpeakableText">Choose number of rounds</string>
-    <string name="player_two_s_name2">Player two\'s name</string>
-    <string name="player_one_s_name2">Player one\'s name</string>
     <string name="username_hint">email@gmail.com</string>
-    <string name="state_failed">Failed to get game state</string>
     <string name="save_failed">Failed to save data to cloud</string>
     <string name="load_failed">Failed to load data from cloud</string>
     <string name="failed_state">Failed to load game state</string>
@@ -67,4 +58,5 @@
     <string name="wait_p1">Waiting for player 2</string>
 <!--    <string name="end_game">End Game</string>-->
     <string name="how_to_play">How To Play</string>
+    <string name="end_game">End Game</string>
 </resources>

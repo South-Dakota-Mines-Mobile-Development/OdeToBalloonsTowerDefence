@@ -1,6 +1,5 @@
 package edu.sdsmt.team4.odetoballonstowerdefence;
 
-import android.provider.ContactsContract;
 import android.view.View;
 import android.widget.Toast;
 
@@ -69,7 +68,6 @@ public class Cloud {
             @Override
             public void onCancelled(DatabaseError error) {
                 //check for errors
-                Toast.makeText(view.getContext(), R.string.state_failed, Toast.LENGTH_SHORT);
             }
         });
     }
