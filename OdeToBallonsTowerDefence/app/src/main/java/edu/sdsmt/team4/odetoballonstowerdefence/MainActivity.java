@@ -58,10 +58,10 @@ package edu.sdsmt.team4.odetoballonstowerdefence;
 
 //Project 2 Grading
 //
-//        firebase login:
-//        firebase password:
-//        Time out period:
-//        How to reset database (file or button):
+//        firebase login: added you as a contributor
+//        firebase password: ditto
+//        Time out period: 30 seconds
+//        How to reset database (file or button): button on login page
 //        Reminder: Mark where the timeout period is set with GRADING: TIMEOUT
 //
 //
@@ -89,7 +89,7 @@ package edu.sdsmt.team4.odetoballonstowerdefence;
 //        DONE 6pt intial setup
 //        DONE 6pt waiting
 //        DONE 17pt store game state
-//        ____ 11pt notify end/early exits
+//        DONE 11pt notify end/early exits
 //        DONE 5pt rotation
 //
 //
@@ -98,7 +98,7 @@ package edu.sdsmt.team4.odetoballonstowerdefence;
 //        DONE 6pt intial setup
 //        DONE 6pt waiting
 //        DONE 17pt store game state
-//        ____ 11pt grab and forward end/early exits
+//        DONE 11pt grab and forward end/early exits
 //        DONE 5pt rotation
 //
 //
