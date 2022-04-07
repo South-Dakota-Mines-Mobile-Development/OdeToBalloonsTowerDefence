@@ -1,10 +1,8 @@
 package edu.sdsmt.team4.odetoballonstowerdefence;
 
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -19,23 +17,20 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 
 import java.util.HashMap;
 
 
 public class LoginActivity extends AppCompatActivity {
+    private final FirebaseAuth userAuth = FirebaseAuth.getInstance();
+    private final DatabaseReference rootRef = FirebaseDatabase.getInstance().getReference();
+    private final DatabaseReference userRef = FirebaseDatabase.getInstance().getReference().child("users");
     private EditText usernameText;
     private EditText passwordText;
     private EditText screenNameText;
-    private final FirebaseAuth userAuth = FirebaseAuth.getInstance();
     private FirebaseUser firebaseUser;
-    private final DatabaseReference rootRef = FirebaseDatabase.getInstance().getReference();
-    private final DatabaseReference userRef = FirebaseDatabase.getInstance().getReference().child("users");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,7 +56,6 @@ public class LoginActivity extends AppCompatActivity {
         Button loginButton = findViewById(R.id.login);
         Button resetButton = findViewById(R.id.reset);
         CheckBox rememberMeCheckbox = findViewById(R.id.rememberMe);
-        rememberMeCheckbox.setChecked(checkboxChecked);
 
         signupButton.setOnClickListener(this::signup);
         loginButton.setOnClickListener(this::signin);
@@ -85,7 +79,7 @@ public class LoginActivity extends AppCompatActivity {
 
     public void rememberMe(View view) {
         CheckBox rememberMeCheckbox = findViewById(R.id.rememberMe);
-        SharedPreferences sharedPreferences = getSharedPreferences("ballons",MODE_PRIVATE);
+        SharedPreferences sharedPreferences = getSharedPreferences("ballons", MODE_PRIVATE);
         SharedPreferences.Editor myEdit = sharedPreferences.edit();
 
         if (rememberMeCheckbox.isChecked()) {
@@ -111,23 +105,26 @@ public class LoginActivity extends AppCompatActivity {
             return;
         }
 
-        userAuth.createUserWithEmailAndPassword(email,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+        userAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
-                if(task.isSuccessful())
-                {
+                if (task.isSuccessful()) {
                     firebaseUser = userAuth.getCurrentUser();
                     HashMap<String, Object> result = new HashMap<>();
-                    result.put("/"+firebaseUser.getUid()+"/name", screenName);
-                    result.put("/"+firebaseUser.getUid()+"/username", email);
-                    result.put("/"+firebaseUser.getUid()+"/password", password);
+                    result.put("/" + firebaseUser.getUid() + "/name", screenName);
+                    result.put("/" + firebaseUser.getUid() + "/username", email);
+                    result.put("/" + firebaseUser.getUid() + "/password", password);
                     userRef.updateChildren(result);
 
-                    view.post(() -> Toast.makeText(view.getContext(), "Account successfully created.", Toast.LENGTH_SHORT).show());
-                }
-                else
-                {
-                    view.post(() -> Toast.makeText(view.getContext(), "Could not create account. Please try again.", Toast.LENGTH_SHORT).show());
+                    passwordText.setText("");
+
+                    view.post(() -> Toast.makeText(view.getContext(), "Account successfully created. " +
+                            "Please re-enter your password and click Login to start playing!", Toast.LENGTH_SHORT).show());
+                } else {
+                    passwordText.setText("");
+
+                    view.post(() -> Toast.makeText(view.getContext(), "Could not create account. " +
+                            "Please try again.", Toast.LENGTH_SHORT).show());
                 }
             }
         });
@@ -141,13 +138,10 @@ public class LoginActivity extends AppCompatActivity {
             return;
         }
 
-        userAuth.signInWithEmailAndPassword(email,password).addOnCompleteListener(task -> {
-            if(task.isSuccessful())
-            {
+        userAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(task -> {
+            if (task.isSuccessful()) {
                 startActivity(new Intent(this, MainActivity.class));
-            }
-            else
-            {
+            } else {
                 view.post(() -> Toast.makeText(view.getContext(), "Could not login", Toast.LENGTH_SHORT).show());
             }
 
@@ -162,13 +156,15 @@ public class LoginActivity extends AppCompatActivity {
         }
 
         if (password.isEmpty()) {
-            view.post(() -> Toast.makeText(view.getContext(), "Please enter a password.", Toast.LENGTH_SHORT).show());
+            view.post(() -> Toast.makeText(view.getContext(), "Please enter a password.",
+                    Toast.LENGTH_SHORT).show());
 
             return false;
         }
 
         if (password.length() < 6) {
-            view.post(() -> Toast.makeText(view.getContext(), "Please enter a password with more then 6 characters.", Toast.LENGTH_SHORT).show());
+            view.post(() -> Toast.makeText(view.getContext(), "Please enter a password with more " +
+                    "then 6 characters.", Toast.LENGTH_SHORT).show());
 
             return false;
         }
