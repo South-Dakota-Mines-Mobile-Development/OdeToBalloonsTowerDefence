@@ -1,5 +1,6 @@
 package edu.sdsmt.team4.odetoballonstowerdefence;
 
+import android.provider.ContactsContract;
 import android.view.View;
 import android.widget.Toast;
 
@@ -296,6 +297,31 @@ public class Cloud {
         });
     }
 
+    public void listenForPlayerLeft(EndCallback callback) {
+        DatabaseReference state = database.getReference().child("state").child("endgame");
+
+        ValueEventListener endEventListener = null;
+        ValueEventListener finalEndEventListener = endEventListener;
+        endEventListener = new ValueEventListener() {
+
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                boolean playerleft = (boolean)snapshot.getValue();
+                if(playerleft) {
+                    callback.end();
+                    state.removeEventListener(finalEndEventListener);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        };
+
+        state.addValueEventListener(endEventListener);
+    }
+
     private class State {
         public boolean player1Waiting = false;
         public boolean player2Waiting = false;
@@ -310,4 +336,8 @@ interface CloudCallback {
 
 interface NameCallback {
     public void names(String p1, String p2);
+}
+
+interface EndCallback {
+    public void end();
 }

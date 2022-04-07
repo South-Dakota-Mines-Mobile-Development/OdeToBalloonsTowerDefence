@@ -33,6 +33,8 @@ public class GameActivity extends AppCompatActivity {
         super.onBackPressed();
     }
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -169,7 +171,12 @@ public class GameActivity extends AppCompatActivity {
         ((TextView)findViewById(R.id.player1Label))
                 .setText(R.string.player1LabelActive);
 
-
+        cloud.listenForPlayerLeft(new EndCallback() {
+            @Override
+            public void end() {
+                onBackPressed();
+            }
+        });
     }
 
     public void selectionModeActivity(View view) {
