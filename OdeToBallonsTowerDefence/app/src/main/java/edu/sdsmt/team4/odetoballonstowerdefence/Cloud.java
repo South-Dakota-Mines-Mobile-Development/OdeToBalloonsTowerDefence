@@ -154,6 +154,7 @@ public class Cloud {
      */
     public void playersWaiting(View view, CloudCallback cc) {
         DatabaseReference ref = database.getReference().child("state");
+        DatabaseReference refUser = database.getReference().child("users");
 
         final State state = new State();
 
@@ -169,51 +170,81 @@ public class Cloud {
                 if (!state.player1Waiting) {
                     ref.child("player1waiting").setValue(true);
                     ref.child("player1name").setValue(auth.getCurrentUser().getUid());
-                    stateEventListener = new ValueEventListener() {
+
+                    refUser.addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot snapshot) {
-                            boolean player1Waiting = (boolean)snapshot.child("player1waiting").getValue();
-                            boolean player2Waiting = (boolean)snapshot.child("player2waiting").getValue();
-                            boolean join = player2Waiting && player1Waiting;
-                            if (join)
-                                ref.removeEventListener(stateEventListener);
-                            cc.playersWaitingCallback(join);
+                            String p1Name = snapshot.child(auth.getCurrentUser().getUid()).child("name").getValue().toString();
+
+                            ref.child("name1").setValue(p1Name);
+
+                            stateEventListener = new ValueEventListener() {
+                                @Override
+                                public void onDataChange(@NonNull DataSnapshot snapshot2) {
+                                    boolean player1Waiting = (boolean)snapshot2.child("player1waiting").getValue();
+                                    boolean player2Waiting = (boolean)snapshot2.child("player2waiting").getValue();
+                                    boolean join = player2Waiting && player1Waiting;
+                                    if (join)
+                                        ref.removeEventListener(stateEventListener);
+                                    cc.playersWaitingCallback(join);
+                                }
+
+                                @Override
+                                public void onCancelled(@NonNull DatabaseError error) {
+
+                                }
+                            };
+                            ref.addValueEventListener(stateEventListener);
                         }
 
                         @Override
                         public void onCancelled(@NonNull DatabaseError error) {
 
                         }
-                    };
-                    ref.addValueEventListener(stateEventListener);
+                    });
+
                 }
                 else if (!p1id.equals(auth.getCurrentUser().getUid())) {
                     ref.child("player2name").setValue(auth.getCurrentUser().getUid());
                     ref.child("player2waiting").setValue(true);
-                    stateEventListener = new ValueEventListener() {
+                    refUser.addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot snapshot) {
-                            boolean player1Waiting = (boolean)snapshot.child("player1waiting").getValue();
+                            String p1Name = snapshot.child(auth.getCurrentUser().getUid()).child("name").getValue().toString();
 
-                            if (!player1Waiting) {
-                                ref.removeEventListener(stateEventListener);
-                                resetState();
-                                playersWaiting(view, cc);
-                                return;
-                            }
+                            ref.child("name2").setValue(p1Name);
 
-                            boolean gameSetup = (boolean)snapshot.child("gamesetup").getValue();
-                            if (gameSetup)
-                                ref.removeEventListener(stateEventListener);
-                            cc.playersWaitingCallback(gameSetup);
+                            stateEventListener = new ValueEventListener() {
+                                @Override
+                                public void onDataChange(@NonNull DataSnapshot snapshot2) {
+                                    boolean player1Waiting = (boolean)snapshot2.child("player1waiting").getValue();
+
+                                    if (!player1Waiting) {
+                                        ref.removeEventListener(stateEventListener);
+                                        resetState();
+                                        playersWaiting(view, cc);
+                                        return;
+                                    }
+
+                                    boolean gameSetup = (boolean)snapshot2.child("gamesetup").getValue();
+                                    if (gameSetup)
+                                        ref.removeEventListener(stateEventListener);
+                                    cc.playersWaitingCallback(gameSetup);
+                                }
+
+                                @Override
+                                public void onCancelled(@NonNull DatabaseError error) {
+
+                                }
+                            };
+                            ref.addValueEventListener(stateEventListener);
                         }
 
                         @Override
                         public void onCancelled(@NonNull DatabaseError error) {
 
                         }
-                    };
-                    ref.addValueEventListener(stateEventListener);
+                    });
                 }
             }
 
@@ -254,14 +285,28 @@ public class Cloud {
 
     public void getNames(View view, NameCallback cc) {
         DatabaseReference ref = database.getReference().child("state");
+        DatabaseReference userRef = database.getReference().child("users");
 
         ref.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                String p1Name = dataSnapshot.child("name1").getValue().toString();
-                String p2Name = dataSnapshot.child("name2").getValue().toString();
+                p1UID = dataSnapshot.child("player1name").getValue().toString();
+                p2UID = dataSnapshot.child("player2name").getValue().toString();
+                userRef.addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        String p1Name = dataSnapshot.child(p1UID).child("name").getValue().toString();
+                        String p2Name = dataSnapshot.child(p2UID).child("name").getValue().toString();
 
-                cc.names(p1Name, p2Name);
+                        cc.names(p1Name, p2Name);
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError error) {
+                        //check for errors
+                        Toast.makeText(view.getContext(), R.string.failed_state, Toast.LENGTH_LONG).show();
+                    }
+                });
             }
 
             @Override
