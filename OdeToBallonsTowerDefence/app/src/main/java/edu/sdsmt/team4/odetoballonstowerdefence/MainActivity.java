@@ -54,15 +54,70 @@ package edu.sdsmt.team4.odetoballonstowerdefence;
 //      a few time if balloon not captured!
 //      Depending on phone screen size you will need to scroll for how to play, and win screen!
 
+
+
+//Project 2 Grading
+//
+//        firebase login:
+//        firebase password:
+//        Time out period:
+//        How to reset database (file or button):
+//        Reminder: Mark where the timeout period is set with GRADING: TIMEOUT
+//
+//
+//        Group:
+//
+//        DONE 6pt Game still works and Database setup
+//        DONE 8pt Database setup\reset
+//        DONE 8pt New user activity
+//        DONE 18pt Opening\login activity
+//        DONE 5pt rotation
+//
+//
+//        Individual:
+//
+//        Sequencing
+//        DONE 4pt Registration sequence
+//        DONE 9pt Login Sequence
+//        DONE 18pt Play Sequence
+//        DONE 9pt Exiting menu, and handlers
+//        DONE 5pt rotation
+//
+//
+//        Upload
+//
+//        DONE 6pt intial setup
+//        DONE 6pt waiting
+//        DONE 17pt store game state
+//        ____ 11pt notify end/early exits
+//        DONE 5pt rotation
+//
+//
+//        Download
+//
+//        DONE 6pt intial setup
+//        DONE 6pt waiting
+//        DONE 17pt store game state
+//        ____ 11pt grab and forward end/early exits
+//        DONE 5pt rotation
+//
+//
+//        Monitor Waiting
+//        DONE 10pt inital setup
+//        DONE 12pt Uploading the 3 state
+//        DONE 12pt Downloading the 3 state
+//        DONE 6pt UI update
+//        DONE 5pt rotation
+//
+//        Please list any additional rules that may be needed to properly grade your project:
+
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.media.MediaPlayer;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
-import android.widget.TextView;
 
 import java.util.Objects;
 
