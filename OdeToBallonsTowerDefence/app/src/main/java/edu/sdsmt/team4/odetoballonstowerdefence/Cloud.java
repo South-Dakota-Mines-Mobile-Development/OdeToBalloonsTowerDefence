@@ -20,6 +20,7 @@ public class Cloud {
     private ValueEventListener stateEventListener = null;
     private ValueEventListener gameEventListener = null;
     private ValueEventListener turnEventListener = null;
+    private  ValueEventListener endEventListener = null;
     private String p1UID;
     private String p2UID;
     private FirebaseAuth auth = FirebaseAuth.getInstance();
@@ -300,8 +301,6 @@ public class Cloud {
     public void listenForPlayerLeft(EndCallback callback) {
         DatabaseReference state = database.getReference().child("state").child("endgame");
 
-        ValueEventListener endEventListener = null;
-        ValueEventListener finalEndEventListener = endEventListener;
         endEventListener = new ValueEventListener() {
 
             @Override
@@ -309,7 +308,7 @@ public class Cloud {
                 boolean playerleft = (boolean)snapshot.getValue();
                 if(playerleft) {
                     callback.end();
-                    state.removeEventListener(finalEndEventListener);
+                    state.removeEventListener(endEventListener);
                 }
             }
 
