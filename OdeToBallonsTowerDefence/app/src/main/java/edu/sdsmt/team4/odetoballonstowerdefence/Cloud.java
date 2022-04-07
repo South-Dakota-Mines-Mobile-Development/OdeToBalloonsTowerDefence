@@ -129,6 +129,9 @@ public class Cloud {
                 ref.child("gamesetup").setValue(false);
                 ref.child("player1name").setValue("");
                 ref.child("player2name").setValue("");
+                ref.child("name1").setValue("");
+                ref.child("name2").setValue("");
+                ref.child("game").setValue("");
                 if (stateEventListener != null)
                     ref.removeEventListener(stateEventListener);
                 if (gameEventListener != null)
