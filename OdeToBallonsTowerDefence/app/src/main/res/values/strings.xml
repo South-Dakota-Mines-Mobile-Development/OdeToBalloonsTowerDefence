@@ -65,5 +65,6 @@
     <string name="remember_me">Remember Me</string>
     <string name="screen_name">Screen Name</string>
     <string name="wait_p1">Waiting for player 2</string>
+<!--    <string name="end_game">End Game</string>-->
     <string name="how_to_play">How To Play</string>
 </resources>

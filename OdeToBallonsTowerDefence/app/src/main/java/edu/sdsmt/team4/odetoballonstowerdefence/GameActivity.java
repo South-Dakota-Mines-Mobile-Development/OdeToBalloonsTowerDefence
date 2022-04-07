@@ -3,9 +3,13 @@ package edu.sdsmt.team4.odetoballonstowerdefence;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.util.DisplayMetrics;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -20,6 +24,7 @@ public class GameActivity extends AppCompatActivity {
     private Cloud cloud = null;
     private Button moveButton = null;
     private Button selectButton = null;
+    private CountDownTimer timer = null;
     // replace with check in state on database!
     private boolean isPlayer1 = false;
 
@@ -30,17 +35,12 @@ public class GameActivity extends AppCompatActivity {
         super.onBackPressed();
     }
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
-
-        //Disables the top action bar
-        try
-        {
-            Objects.requireNonNull(this.getSupportActionBar()).hide();
-        }
-        catch (NullPointerException ignored){}
 
         DisplayMetrics displayMetrics = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
@@ -57,6 +57,18 @@ public class GameActivity extends AppCompatActivity {
         gameView.setButtons(moveButton, selectButton);
         cloud = new Cloud();
         cloud.init(gameView, isPlayer1);
+        //GRADING: TIMEOUT
+        timer = new CountDownTimer(30000, 1000) {
+            @Override
+            public void onTick(long l) {
+
+            }
+
+            @Override
+            public void onFinish() {
+                cloud.endGame();
+            }
+        };
 
         findViewById(R.id.gameView).addOnLayoutChangeListener(
                 (v, left, top, right, bottom, lastLeft, lastTop, lastRight, lastBottom) ->
@@ -116,6 +128,7 @@ public class GameActivity extends AppCompatActivity {
                             if (isPlayer1) {
                                 selectButton.setEnabled(true);
                                 gameView.setTouchEnabled(true);
+                                timer.start();
                             }
                             else {
                                 selectButton.setEnabled(false);
@@ -140,6 +153,7 @@ public class GameActivity extends AppCompatActivity {
                             if (!isPlayer1) {
                                 selectButton.setEnabled(true);
                                 gameView.setTouchEnabled(true);
+                                timer.start();
                             }
                             else {
                                 selectButton.setEnabled(false);
@@ -159,6 +173,7 @@ public class GameActivity extends AppCompatActivity {
         findViewById(R.id.makeMoveButton)
                 .setOnClickListener(v -> {
                     viewModel.onMakeMove();
+                    timer.cancel();
                     cloud.saveToCloud(gameView);
                 });
 
@@ -173,7 +188,15 @@ public class GameActivity extends AppCompatActivity {
         ((TextView)findViewById(R.id.player1Label))
                 .setText(R.string.player1LabelActive);
 
-
+        cloud.listenForPlayerLeft(new EndCallback() {
+            @Override
+            public void end() {
+                cloud.resetState();
+                Intent reset = new Intent(getApplicationContext(), LoginActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(reset);
+            }
+        });
     }
 
     public void selectionModeActivity(View view) {
@@ -191,6 +214,33 @@ public class GameActivity extends AppCompatActivity {
                 viewModel.onChangeCollectionAreaType(selectionMode);
             }
         }
+    }
+
+    /**
+     * Called when it is time to create the options menu
+     */
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.game_menu, menu);
+        return true;
+    }
+
+    /**
+     * Handle options menu selections
+     *
+     * @param item Menu item selected
+     */
+    @SuppressLint("NonConstantResourceId")
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+
+            case R.id.end_game:
+                cloud.endGame();
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }
 

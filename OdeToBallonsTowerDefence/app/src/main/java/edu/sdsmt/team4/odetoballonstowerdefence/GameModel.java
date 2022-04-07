@@ -27,6 +27,7 @@ public class GameModel {
     private int collectionAreaType = CollectionArea.RECTANGLE; //default is rectangle
     private int screenWidth;
     private int screenHeight;
+    private Boolean endgame = false;
     private Boolean initialized = false;
 
     public void setScreenSize(int screenWidth, int screenHeight){//may need to move balloons location?
@@ -191,6 +192,8 @@ public class GameModel {
         // load players
         playerOne.loadJson(db, 1);
         playerTwo.loadJson(db, 2);
+
+//        endgame = db.child("state").child("endgame").getValue().equals(true); THIS IS WHAT BREAKS
 
         for (int i = 1; i <= balloons.size(); i++) {
             // passed screen height and width to store relative coordinates

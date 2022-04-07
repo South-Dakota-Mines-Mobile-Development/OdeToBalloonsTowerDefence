@@ -1,5 +1,6 @@
 package edu.sdsmt.team4.odetoballonstowerdefence;
 
+import android.provider.ContactsContract;
 import android.view.View;
 import android.widget.Toast;
 
@@ -19,6 +20,7 @@ public class Cloud {
     private ValueEventListener stateEventListener = null;
     private ValueEventListener gameEventListener = null;
     private ValueEventListener turnEventListener = null;
+    private  ValueEventListener endEventListener = null;
     private String p1UID;
     private String p2UID;
     private FirebaseAuth auth = FirebaseAuth.getInstance();
@@ -70,6 +72,16 @@ public class Cloud {
                 Toast.makeText(view.getContext(), R.string.state_failed, Toast.LENGTH_SHORT);
             }
         });
+    }
+
+    public void endGame() {
+        resetState();
+        DatabaseReference state = database.getReference().child("state");
+        state.child("endgame").setValue(true);
+
+        //WAIT
+
+        state.child("endgame").setValue(false);
     }
 
     public void loadFromCloud(GameView view) {
@@ -307,6 +319,29 @@ public class Cloud {
         });
     }
 
+    public void listenForPlayerLeft(EndCallback callback) {
+        DatabaseReference state = database.getReference().child("state").child("endgame");
+
+        endEventListener = new ValueEventListener() {
+
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                boolean playerleft = (boolean)snapshot.getValue();
+                if(playerleft) {
+                    callback.end();
+                    state.removeEventListener(endEventListener);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        };
+
+        state.addValueEventListener(endEventListener);
+    }
+
     private class State {
         public boolean player1Waiting = false;
         public boolean player2Waiting = false;
@@ -321,4 +356,8 @@ interface CloudCallback {
 
 interface NameCallback {
     public void names(String p1, String p2);
+}
+
+interface EndCallback {
+    public void end();
 }
