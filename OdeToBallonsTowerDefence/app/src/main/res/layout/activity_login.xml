@@ -11,6 +11,7 @@
 
         <EditText
             android:id="@+id/usernameInput"
+            android:hint="@string/username_hint"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
@@ -25,6 +26,7 @@
 
         <EditText
             android:id="@+id/passwordInput"
+            android:hint="@string/username_hint"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
@@ -32,7 +34,8 @@
             android:inputType="textPassword"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/usernameInput" />
+            app:layout_constraintTop_toBottomOf="@+id/usernameInput"
+            android:autofillHints="" />
 
         <Button
             android:id="@+id/login"
@@ -75,6 +78,7 @@
 
         <EditText
             android:id="@+id/screenNameInput"
+            android:hint="@string/username_hint"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="60dp"
@@ -83,7 +87,8 @@
             android:text="@string/screen_name"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            android:autofillHints="" />
 
         <Button
             android:id="@+id/howToPlay"

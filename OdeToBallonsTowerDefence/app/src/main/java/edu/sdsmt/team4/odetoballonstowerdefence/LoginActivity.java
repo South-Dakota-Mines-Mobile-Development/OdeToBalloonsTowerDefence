@@ -42,7 +42,6 @@ public class LoginActivity extends AppCompatActivity {
         String screenname = sharedPreferences.getString("screenname", "Screen Name");
         String email = sharedPreferences.getString("email", "email@gmail.com");
         String password = sharedPreferences.getString("password", "");
-        Boolean checkboxChecked = sharedPreferences.getBoolean("checked", false);
 
         this.usernameText = findViewById(R.id.usernameInput);
         this.passwordText = findViewById(R.id.passwordInput);
