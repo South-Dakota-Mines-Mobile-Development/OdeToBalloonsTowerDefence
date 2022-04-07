@@ -154,7 +154,7 @@ public class Cloud {
      */
     public void playersWaiting(View view, CloudCallback cc) {
         DatabaseReference ref = database.getReference().child("state");
-        DatabaseReference refUser = database.getReference().child("users");
+        DatabaseReference refUser = database.getReference().child("users").child(auth.getCurrentUser().getUid());
 
         final State state = new State();
 
@@ -174,7 +174,7 @@ public class Cloud {
                     refUser.addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot snapshot) {
-                            String p1Name = snapshot.child(auth.getCurrentUser().getUid()).child("name").getValue().toString();
+                            String p1Name = snapshot.child("name").getValue().toString();
 
                             ref.child("name1").setValue(p1Name);
 
@@ -210,7 +210,7 @@ public class Cloud {
                     refUser.addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot snapshot) {
-                            String p1Name = snapshot.child(auth.getCurrentUser().getUid()).child("name").getValue().toString();
+                            String p1Name = snapshot.child("name").getValue().toString();
 
                             ref.child("name2").setValue(p1Name);
 
