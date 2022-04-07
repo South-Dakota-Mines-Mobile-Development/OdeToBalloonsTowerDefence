@@ -14,8 +14,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-import java.util.Objects;
-
 import edu.sdsmt.team4.odetoballonstowerdefence.ModelDataTypes.PlayerModel;
 
 public class GameActivity extends AppCompatActivity {

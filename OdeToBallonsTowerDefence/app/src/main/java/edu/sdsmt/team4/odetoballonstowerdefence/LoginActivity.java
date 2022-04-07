@@ -90,10 +90,10 @@ public class LoginActivity extends AppCompatActivity {
             myEdit.putString("email", this.usernameText.getText().toString());
             myEdit.putString("password", this.passwordText.getText().toString());
 
-            myEdit.commit();
+            myEdit.apply();
         } else {
             myEdit.clear();
-            myEdit.commit();
+            myEdit.apply();
         }
 
     }
