@@ -290,23 +290,10 @@ public class Cloud {
         ref.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                p1UID = dataSnapshot.child("player1name").getValue().toString();
-                p2UID = dataSnapshot.child("player2name").getValue().toString();
-                userRef.addListenerForSingleValueEvent(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(DataSnapshot dataSnapshot) {
-                        String p1Name = dataSnapshot.child(p1UID).child("name").getValue().toString();
-                        String p2Name = dataSnapshot.child(p2UID).child("name").getValue().toString();
+                String p1Name = dataSnapshot.child("name1").getValue().toString();
+                String p2Name = dataSnapshot.child("name2").getValue().toString();
 
-                        cc.names(p1Name, p2Name);
-                    }
-
-                    @Override
-                    public void onCancelled(DatabaseError error) {
-                        //check for errors
-                        Toast.makeText(view.getContext(), R.string.failed_state, Toast.LENGTH_LONG).show();
-                    }
-                });
+                cc.names(p1Name, p2Name);
             }
 
             @Override
