@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModelProvider;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.util.DisplayMetrics;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -23,6 +24,7 @@ public class GameActivity extends AppCompatActivity {
     private Cloud cloud = null;
     private Button moveButton = null;
     private Button selectButton = null;
+    private CountDownTimer timer = null;
     // replace with check in state on database!
     private boolean isPlayer1 = false;
 
@@ -55,6 +57,18 @@ public class GameActivity extends AppCompatActivity {
         gameView.setButtons(moveButton, selectButton);
         cloud = new Cloud();
         cloud.init(gameView, isPlayer1);
+        //GRADING: TIMEOUT
+        timer = new CountDownTimer(30000, 1000) {
+            @Override
+            public void onTick(long l) {
+
+            }
+
+            @Override
+            public void onFinish() {
+                cloud.endGame();
+            }
+        };
 
         findViewById(R.id.gameView).addOnLayoutChangeListener(
                 (v, left, top, right, bottom, lastLeft, lastTop, lastRight, lastBottom) ->
@@ -114,6 +128,7 @@ public class GameActivity extends AppCompatActivity {
                             if (isPlayer1) {
                                 selectButton.setEnabled(true);
                                 gameView.setTouchEnabled(true);
+                                timer.start();
                             }
                             else {
                                 selectButton.setEnabled(false);
@@ -138,6 +153,7 @@ public class GameActivity extends AppCompatActivity {
                             if (!isPlayer1) {
                                 selectButton.setEnabled(true);
                                 gameView.setTouchEnabled(true);
+                                timer.start();
                             }
                             else {
                                 selectButton.setEnabled(false);
@@ -157,6 +173,7 @@ public class GameActivity extends AppCompatActivity {
         findViewById(R.id.makeMoveButton)
                 .setOnClickListener(v -> {
                     viewModel.onMakeMove();
+                    timer.cancel();
                     cloud.saveToCloud(gameView);
                 });
 
