@@ -71,7 +71,7 @@ package edu.sdsmt.team4.odetoballonstowerdefence;
 //        DONE 8pt Database setup\reset
 //        DONE 8pt New user activity
 //        DONE 18pt Opening\login activity
-//        ____ 5pt rotation
+//        DONE 5pt rotation
 //
 //
 //        Individual:
@@ -81,7 +81,7 @@ package edu.sdsmt.team4.odetoballonstowerdefence;
 //        DONE 9pt Login Sequence
 //        DONE 18pt Play Sequence
 //        DONE 9pt Exiting menu, and handlers
-//        ____ 5pt rotation
+//        DONE 5pt rotation
 //
 //
 //        Upload
@@ -90,7 +90,7 @@ package edu.sdsmt.team4.odetoballonstowerdefence;
 //        DONE 6pt waiting
 //        DONE 17pt store game state
 //        ____ 11pt notify end/early exits
-//        ____ 5pt rotation
+//        DONE 5pt rotation
 //
 //
 //        Download
@@ -99,15 +99,15 @@ package edu.sdsmt.team4.odetoballonstowerdefence;
 //        DONE 6pt waiting
 //        DONE 17pt store game state
 //        ____ 11pt grab and forward end/early exits
-//        ____ 5pt rotation
+//        DONE 5pt rotation
 //
 //
 //        Monitor Waiting
-//        ____ 10pt inital setup
-//        ____ 12pt Uploading the 3 state
-//        ____ 12pt Downloading the 3 state
-//        ____ 6pt UI update
-//        ____ 5pt rotation
+//        DONE 10pt inital setup
+//        DONE 12pt Uploading the 3 state
+//        DONE 12pt Downloading the 3 state
+//        DONE 6pt UI update
+//        DONE 5pt rotation
 //
 //        Please list any additional rules that may be needed to properly grade your project:
 

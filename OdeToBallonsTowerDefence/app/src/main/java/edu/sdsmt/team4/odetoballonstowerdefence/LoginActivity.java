@@ -55,12 +55,15 @@ public class LoginActivity extends AppCompatActivity {
         Button signupButton = findViewById(R.id.signup);
         Button loginButton = findViewById(R.id.login);
         Button resetButton = findViewById(R.id.reset);
+        Button howToPlay = findViewById(R.id.howToPlay);
         CheckBox rememberMeCheckbox = findViewById(R.id.rememberMe);
+
 
         signupButton.setOnClickListener(this::signup);
         loginButton.setOnClickListener(this::signin);
         resetButton.setOnClickListener(this::resetDatabase);
         rememberMeCheckbox.setOnClickListener(this::rememberMe);
+        howToPlay.setOnClickListener(this::howToActivity);
     }
 
     public void resetDatabase(View view) {
@@ -128,6 +131,12 @@ public class LoginActivity extends AppCompatActivity {
                 }
             }
         });
+    }
+
+    private void howToActivity(View view) {
+        Intent intent = new Intent(this, HowToActivity.class);
+
+        startActivity(intent);
     }
 
     private void signin(View view) {
